@@ -622,7 +622,7 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
                   <p className={styles.personTitle}>{person.title}</p>
                   <p className={styles.mutualConnections}>{person.mutual} mutual connections</p>
                 </div>
-                <button className={styles.connectButton}>Connect</button>
+                <button className={styles.connectButton}>Friend +</button>
               </div>
             ))}
           </div>
