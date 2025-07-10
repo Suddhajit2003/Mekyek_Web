@@ -1,8 +1,6 @@
 import axios from 'axios';
+import { API_CONFIG } from './config/api.config';
 import type { AxiosInstance, AxiosResponse } from 'axios';
-
-// Base URL for your backend
-const BASE_URL = 'http://localhost:5000/api'; // Update this with your backend URL
 
 // Types for API responses
 export interface ApiResponse<T> {
@@ -18,7 +16,7 @@ export interface User {
   email: string;
   profilePhoto?: string;
   dob?: string;
-  phoneNumber?: string;
+  phoneNumber?: number;
   gender?: string;
   country?: string;
   about?: string;
@@ -94,7 +92,7 @@ export interface News {
   likes: number;
   likeBy: string[];
   comments: Comment[];
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface Event {
@@ -111,7 +109,7 @@ export interface Event {
     profilePhoto: string;
     _id: string;
   };
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface Job {
@@ -134,7 +132,7 @@ export interface Job {
   jobDescription: string;
   qualifications: string;
   jobBenefits: string;
-  postedOn: Date;
+  postedOn: string;
 }
 
 export interface Feed {
@@ -147,11 +145,10 @@ export interface Feed {
     _id: string;
   };
   image?: string;
-  postOn: Date;
   likes: number;
   likeBy: string[];
   comments: Comment[];
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface Comment {
@@ -165,16 +162,16 @@ export interface Community {
   _id: string;
   name: string;
   description: string;
-  category: string;
+  // category: string;
   members: CommunityMember[];
   posts: CommunityPost[];
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 export interface CommunityMember {
   userId: string;
   role: string;
-  joinedAt: Date;
+  // joinedAt: Date;
 }
 
 export interface CommunityPost {
@@ -186,6 +183,7 @@ export interface CommunityPost {
     profilePhoto: string;
     _id: string;
   };
+  image?: string | null;
   likes: number;
   likeBy: string[];
   comments: Comment[];
@@ -197,13 +195,13 @@ export interface Company {
   companyName: string;
   companyLogo: string;
   companyEmail: string;
-  companyDescription: string;
+  // companyDescription: string;
   companyWebsite: string;
   companyAddress: string;
-  companyPhone: string;
-  companyIndustry: string;
-  companySize: string;
-  foundedYear: string;
+  // companyPhone: string;
+  // companyIndustry: string;
+  // companySize: string;
+  // foundedYear: string;
   userId: string;
 }
 
@@ -228,16 +226,15 @@ export interface CompanyJob {
 
 // Create axios instance
 const api: AxiosInstance = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  baseURL: API_CONFIG.BASE_URL,
+  withCredentials: true,
+  headers: API_CONFIG.DEFAULT_HEADERS,
 });
 
 // Request interceptor to add auth token
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem(API_CONFIG.STORAGE_KEYS.TOKEN);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -250,40 +247,45 @@ api.interceptors.request.use(
 
 // Response interceptor for error handling
 api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const response = await axios.post(`${BASE_URL}/auth/refresh-token`, { refreshToken });
-        const { token } = response.data;
-        localStorage.setItem('token', token);
-        api.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-        return api(originalRequest);
-      } catch (refreshError) {
-        // Handle refresh token failure (e.g., redirect to login)
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/login';
-        return Promise.reject(refreshError);
-      }
+  (response: AxiosResponse) => {
+    return response;
+  },
+  (error) => {
+    const errorMessage = error.response?.data?.message ||
+      API_CONFIG.ERROR_MESSAGES.UNKNOWN_ERROR;
+
+    if (error.response?.status === 401) {
+      // Handle unauthorized (e.g., show login modal or redirect to landing page)
+      localStorage.removeItem('token');
+      localStorage.removeItem('userData');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('userData');
+      // TODO: Trigger login modal or redirect to landing page here
+      // window.location.href = '/';
     }
     return Promise.reject(error);
   }
 );
 
+// Utility function to map backend comment to frontend Comment interface
+function mapBackendCommentToFrontend(comment: any): Comment {
+  return {
+    userId: comment.commenter ?? comment.userId, // fallback if already mapped
+    comment: comment.comment,
+    userName: comment.userName,
+    createdAt: new Date(comment.createdAt),
+  };
+}
+
 // API Class
 class ApiService {
   // Authentication APIs
-  async login(email: string, password: string): Promise<{ user: User; token: string; refreshToken: string }> {
+  async login(email: string, password: string, remember = false): Promise<{ user: User; token: string }> {
     try {
-      const response = await api.post('/auth/login', { email, password });
+      const response = await api.post(API_CONFIG.ENDPOINTS.AUTH.LOGIN, { email, password });
       if (response.data.success) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('refreshToken', response.data.refreshToken);
-        return { user: response.data.user, token: response.data.token, refreshToken: response.data.refreshToken };
+        this.setSession(response.data.token, response.data.user, remember);
+        return { user: response.data.user, token: response.data.token };
       }
       throw new Error(response.data.message);
     } catch (error: any) {
@@ -291,18 +293,19 @@ class ApiService {
     }
   }
 
-    async signup(userData: {
+  async signup(userData: {
     firstName: string;
     lastName: string;
     email: string;
     password: string;
-  }): Promise<{ user: User; token: string; refreshToken: string }> {
+  }, remember = false): Promise<{ user: User; token: string }> {
     try {
-      const response = await api.post('/auth/signup', userData);
+      const response = await api.post(API_CONFIG.ENDPOINTS.AUTH.SIGNUP, userData);
       if (response.data.success) {
+        this.setSession(response.data.token, response.data.user, remember);
         localStorage.setItem('token', response.data.token);
-        localStorage.setItem('refreshToken', response.data.refreshToken);
-        return { user: response.data.user, token: response.data.token, refreshToken: response.data.refreshToken };
+        localStorage.setItem('userData', JSON.stringify(response.data.user));
+        return { user: response.data.user, token: response.data.token };
       }
       throw new Error(response.data.message);
     } catch (error: any) {
@@ -310,25 +313,12 @@ class ApiService {
     }
   }
 
-  async refreshToken(): Promise<{ token: string }> {
-    try {
-      const refreshToken = localStorage.getItem('refreshToken');
-      const response = await api.post('/auth/refresh-token', { refreshToken });
-      if (response.data.success) {
-        localStorage.setItem('token', response.data.token);
-        return { token: response.data.token };
-      }
-      throw new Error(response.data.message);
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to refresh token');
-    }
-  }
-
   async googleLogin(code: string): Promise<{ user: User; token: string }> {
     try {
-      const response = await api.get(`/auth/google?code=${code}`);
+      const response = await api.get(`${API_CONFIG.ENDPOINTS.AUTH.GOOGLE_LOGIN}?code=${code}`);
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
+        localStorage.setItem('userData', JSON.stringify(response.data.user));
         return { user: response.data.user, token: response.data.token };
       }
       throw new Error(response.data.message);
@@ -426,49 +416,93 @@ class ApiService {
 
   // News APIs
   async getNews(): Promise<News[]> {
+    console.log('[API Call] getNews');
     try {
       const response = await api.get('/posts/news');
-      return response.data;
+      console.log('[API Success] getNews', response.data);
+      // Defensive: handle both array and {success, news} shape
+      if (Array.isArray(response.data)) return response.data;
+      if (response.data.news && Array.isArray(response.data.news)) return response.data.news;
+      if (response.data.News && Array.isArray(response.data.News)) return response.data.News;
+      return [];
     } catch (error: any) {
+      console.error('[API Error] getNews', error);
       throw new Error(error.response?.data?.message || 'Failed to get news');
     }
   }
 
   async postNews(newsData: FormData): Promise<News> {
+    console.log('[API Call] postNews');
     try {
       const response = await api.post('/posts/news', newsData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      return response.data.news;
+      console.log('[API Success] postNews', response.data);
+      if (response.data.success && response.data.news) {
+        return response.data.news;
+      } else if (response.data.News) {
+        return response.data.News;
+      } else if (response.data.news) {
+        return response.data.news;
+      } else {
+        throw new Error(response.data.message || 'Failed to create news');
+      }
     } catch (error: any) {
+      console.error('[API Error] postNews', error);
       throw new Error(error.response?.data?.message || 'Failed to post news');
     }
   }
 
   async likeNews(newsId: string, userId: string): Promise<News> {
+    console.log('[API Call] likeNews', { newsId, userId });
     try {
-      const response = await api.post('/posts/like-news', { newsId, userId });
-      return response.data.News;
+      const response = await api.post('/posts/news/like', { newsId, userId });
+      console.log('[API Success] likeNews', response.data);
+      if (response.data.success && response.data.News) {
+        return response.data.News;
+      } else if (response.data.news) {
+        return response.data.news;
+      } else {
+        throw new Error(response.data.message || 'Failed to like news');
+      }
     } catch (error: any) {
+      console.error('[API Error] likeNews', error);
       throw new Error(error.response?.data?.message || 'Failed to like news');
     }
   }
 
   async commentNews(newsId: string, userId: string, comment: string, userName: string): Promise<News> {
+    console.log('[API Call] commentNews', { newsId, userId, comment, userName });
     try {
-      const response = await api.post('/posts/comment-news', { newsId, userId, comment, userName });
-      return response.data.News;
+      const response = await api.post('/posts/news/commentPost', {
+        newsId,
+        userId,
+        comment,
+        userName
+      });
+      console.log('[API Success] commentNews', response.data);
+      if (response.data.success && response.data.News) {
+        return response.data.News;
+      } else if (response.data.news) {
+        return response.data.news;
+      } else {
+        throw new Error(response.data.message || 'Failed to comment on news');
+      }
     } catch (error: any) {
+      console.error('[API Error] commentNews', error);
       throw new Error(error.response?.data?.message || 'Failed to comment on news');
     }
   }
 
   async getNewsComments(newsId: string): Promise<Comment[]> {
     try {
-      const response = await api.get(`/posts/comments?newsId=${newsId}`);
-      return response.data.comments;
+      const response = await api.get(`/posts/news/getComments?newsId=${newsId}`);
+      // Defensive: handle both {comments: []} and array
+      if (Array.isArray(response.data)) return response.data;
+      if (response.data.comments && Array.isArray(response.data.comments)) return response.data.comments.map(mapBackendCommentToFrontend);
+      return [];
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to get comments');
     }
@@ -538,8 +572,12 @@ class ApiService {
   async getFeeds(): Promise<Feed[]> {
     try {
       const response = await api.get('/feeds/getFeeds');
-      return response.data;
+      if (response.data.success) {
+        return response.data.feeds;
+      }
+      throw new Error(response.data.message || 'Failed to get feeds');
     } catch (error: any) {
+      console.error('[API Error] getFeeds', error);
       throw new Error(error.response?.data?.message || 'Failed to get feeds');
     }
   }
@@ -547,12 +585,14 @@ class ApiService {
   async postFeed(feedData: FormData): Promise<Feed> {
     try {
       const response = await api.post('/feeds/post', feedData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
-      return response.data.feed;
+      if (response.data.success) {
+        return response.data.feed;
+      }
+      throw new Error(response.data.message || 'Failed to post feed');
     } catch (error: any) {
+      console.error('[API Error] postFeed', error);
       throw new Error(error.response?.data?.message || 'Failed to post feed');
     }
   }
@@ -560,25 +600,36 @@ class ApiService {
   async likeFeed(feedId: string, userId: string): Promise<Feed> {
     try {
       const response = await api.post('/feeds/like', { feedId, userId });
-      return response.data.feed;
+      if (response.data.success) {
+        return response.data.feed;
+      }
+      throw new Error(response.data.message || 'Failed to like feed');
     } catch (error: any) {
+      console.error('[API Error] likeFeed', error);
       throw new Error(error.response?.data?.message || 'Failed to like feed');
     }
   }
 
   async commentFeed(feedId: string, userId: string, comment: string, userName: string): Promise<Feed> {
     try {
-      const response = await api.post('/feeds/comment', { feedId, userId, comment, userName });
-      return response.data.feed;
+      const response = await api.post('/feeds/commentPost', { feedId, userId, comment, userName });
+      if (response.data.success) {
+        return response.data.feed;
+      }
+      throw new Error(response.data.message || 'Failed to comment on feed');
     } catch (error: any) {
+      console.error('[API Error] commentFeed', error);
       throw new Error(error.response?.data?.message || 'Failed to comment on feed');
     }
   }
 
   async getFeedComments(feedId: string): Promise<Comment[]> {
     try {
-      const response = await api.get(`/feeds/comments?feedId=${feedId}`);
-      return response.data.comments;
+      const response = await api.get(`/feeds/getComments?feedId=${feedId}`);
+      if (response.data.success) {
+        return (response.data.comments || []).map(mapBackendCommentToFrontend);
+      }
+      throw new Error(response.data.message || 'Failed to get feed comments');
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to get feed comments');
     }
@@ -624,7 +675,6 @@ class ApiService {
       throw new Error(error.response?.data?.message || 'Failed to create community');
     }
   }
-
   async createCommunityPost(postData: {
     communityId: string;
     content: string;
@@ -636,7 +686,7 @@ class ApiService {
     };
   }): Promise<CommunityPost> {
     try {
-      const response = await api.post('/community/post', postData);
+      const response = await api.post(API_CONFIG.ENDPOINTS.COMMUNITY.POST, postData);
       return response.data.post;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to create community post');
@@ -645,7 +695,11 @@ class ApiService {
 
   async likeCommunityPost(postId: string, communityId: string, userId: string): Promise<CommunityPost> {
     try {
-      const response = await api.post('/community/like', { postId, communityId, userId });
+      const response = await api.post(API_CONFIG.ENDPOINTS.COMMUNITY.LIKE, {
+        postId,
+        communityId,
+        userId
+      });
       return response.data.post;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to like community post');
@@ -654,7 +708,13 @@ class ApiService {
 
   async commentCommunityPost(postId: string, communityId: string, userId: string, comment: string, userName: string): Promise<CommunityPost> {
     try {
-      const response = await api.post('/community/comment', { postId, communityId, userId, comment, userName });
+      const response = await api.post(API_CONFIG.ENDPOINTS.COMMUNITY.COMMENT, {
+        postId,
+        communityId,
+        userId,
+        comment,
+        userName
+      });
       return response.data.post;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to comment on community post');
@@ -663,8 +723,10 @@ class ApiService {
 
   async getCommunityPostComments(postId: string, communityId: string): Promise<Comment[]> {
     try {
-      const response = await api.get(`/community/comments?postId=${postId}&communityId=${communityId}`);
-      return response.data;
+      const response = await api.get(
+        `${API_CONFIG.ENDPOINTS.COMMUNITY.COMMENTS}?postId=${postId}&communityId=${communityId}`
+      );
+      return (response.data.comments || []).map(mapBackendCommentToFrontend);
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to get community post comments');
     }
@@ -736,17 +798,40 @@ class ApiService {
 
   // Utility methods
   logout(): void {
+    // Clear both storages
+    localStorage.removeItem(API_CONFIG.STORAGE_KEYS.TOKEN);
+    localStorage.removeItem('userData');
+    sessionStorage.removeItem(API_CONFIG.STORAGE_KEYS.TOKEN);
+    sessionStorage.removeItem('userData');
+    // TODO: Trigger login modal or redirect to landing page here
+    // window.location.href = '/';
+  }
+
+  getStorage() {
+    // Prefer localStorage if both have a token, else use whichever has a token
+    if (localStorage.getItem('token')) return localStorage;
+    if (sessionStorage.getItem('token')) return sessionStorage;
+    return localStorage; // fallback
+  }
+  setSession(token: string, user: any, remember: boolean) {
+    // Always clear both storages before setting new session
     localStorage.removeItem('token');
-    window.location.href = '/login';
+    localStorage.removeItem('userData');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userData');
+    const storage = remember ? localStorage : sessionStorage;
+    storage.setItem('token', token);
+    storage.setItem('userData', JSON.stringify(user));
   }
 
   getCurrentUser(): User | null {
-    const userData = localStorage.getItem('userData');
+    const storage = this.getStorage();
+    const userData = storage.getItem('userData');
     return userData ? JSON.parse(userData) : null;
   }
-
   getAuthToken(): string | null {
-    return localStorage.getItem('token');
+    const storage = this.getStorage();
+    return storage.getItem('token');
   }
 
   isAuthenticated(): boolean {

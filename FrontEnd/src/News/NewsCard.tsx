@@ -20,6 +20,8 @@ interface NewsCardProps {
   initialComments?: number;
   initialShares?: number;
   initialSaves?: number;
+  onLike?: () => void;
+  onComment?: (comment: string) => void;
 }
 
 const NewsCard: React.FC<NewsCardProps> = ({
@@ -35,7 +37,9 @@ const NewsCard: React.FC<NewsCardProps> = ({
   initialLikes = 0,
   initialComments = 0,
   initialShares = 0,
-  initialSaves = 0
+  initialSaves = 0,
+  onLike,
+  onComment
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
@@ -46,6 +50,8 @@ const NewsCard: React.FC<NewsCardProps> = ({
   const [showToast, setShowToast] = useState('');
   const [showRepostModal, setShowRepostModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [commentInput, setCommentInput] = useState('');
+  const [commentLoading, setCommentLoading] = useState(false);
 
   const reportReasons = [
     "Spam or misleading content",
@@ -61,16 +67,41 @@ const NewsCard: React.FC<NewsCardProps> = ({
     setTimeout(() => setShowToast(''), 3000);
   };
 
-  const handleLike = (e: React.MouseEvent) => {
+  const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsLiked(!isLiked);
-    setLikesCount(prev => isLiked ? prev - 1 : prev + 1);
-    showToastMessage(isLiked ? 'Unliked' : 'Liked!');
+    if (onLike) {
+      setIsLiked(!isLiked);
+      setLikesCount(prev => isLiked ? prev - 1 : prev + 1);
+      await onLike();
+      showToastMessage(isLiked ? 'Unliked' : 'Liked!');
+    } else {
+      setIsLiked(!isLiked);
+      setLikesCount(prev => isLiked ? prev - 1 : prev + 1);
+      showToastMessage(isLiked ? 'Unliked' : 'Liked!');
+    }
   };
 
   const handleComment = (e: React.MouseEvent) => {
     e.stopPropagation();
-    showToastMessage('Comments feature coming soon!');
+    // Focus the comment input
+    const input = document.getElementById(`comment-input-${cardIndex}`);
+    if (input) (input as HTMLInputElement).focus();
+  };
+
+  const handleCommentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!commentInput.trim() || !onComment) return;
+    setCommentLoading(true);
+    try {
+      await onComment(commentInput);
+      setCommentInput('');
+      setCommentsCount(prev => prev + 1);
+      showToastMessage('Comment posted!');
+    } catch {
+      showToastMessage('Failed to post comment');
+    } finally {
+      setCommentLoading(false);
+    }
   };
 
   const handleShare = (e: React.MouseEvent) => {
@@ -231,8 +262,21 @@ const NewsCard: React.FC<NewsCardProps> = ({
             View Source
           </div>
         </div>
-
-
+        {/* Comment Input UI */}
+        <form className={styles.commentForm} onSubmit={handleCommentSubmit} style={{marginTop: 12}}>
+          <input
+            id={`comment-input-${cardIndex}`}
+            type="text"
+            placeholder="Write a comment..."
+            value={commentInput}
+            onChange={e => setCommentInput(e.target.value)}
+            disabled={commentLoading}
+            className={styles.commentInput}
+          />
+          <button type="submit" disabled={commentLoading || !commentInput.trim()} className={styles.commentButton}>
+            {commentLoading ? 'Posting...' : 'Post'}
+          </button>
+        </form>
       </div>
 
       {/* Repost Modal */}

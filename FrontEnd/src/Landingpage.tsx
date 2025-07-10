@@ -9,7 +9,6 @@ import Frequently_Asked_Questions from './Landing_Page/Frequently';
 import Career from './Landing_Page/Career';
 import Footer from './Footer';
 import Jobpopup from './Landing_Page/Jobpopup';
-import Cunnectus from './Landing_Page/Cunnectus';
 import LoginSignupModal from './Landing_Page/LoginSignupModal';
 import SignupModal from './Landing_Page/SignupModal';
 
@@ -36,7 +35,6 @@ const Landingpage = ({ onLoginSuccess }: { onLoginSuccess?: () => void }) => {
   const [showCunnectus, setShowCunnectus] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
   const empowerRef = useScrollFadeIn();
   const businessesRef = useScrollFadeIn();
   const featuresRef = useScrollFadeIn();
@@ -67,10 +65,8 @@ const Landingpage = ({ onLoginSuccess }: { onLoginSuccess?: () => void }) => {
   };
 
   const handleLoginSuccess = () => {
-    setLoggedIn(true);
     if (onLoginSuccess) onLoginSuccess();
   };
-  if (loggedIn) return null;
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>

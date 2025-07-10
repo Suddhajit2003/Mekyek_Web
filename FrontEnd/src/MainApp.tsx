@@ -14,9 +14,10 @@ import { useCompany, useAuth } from './hooks/useApi';
 interface MainAppProps {
   currentPage: string;
   setCurrentPage: (page: string) => void;
+  setLoggedIn?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const registrationSteps = [
+/*const registrationSteps = [
   { label: 'Company Name', key: 'companyName', type: 'text', placeholder: 'Enter company name', required: true },
   { label: 'Company Description', key: 'companyDescription', type: 'textarea', placeholder: 'Describe your company', required: false },
   { label: 'Company Website', key: 'companyWebsite', type: 'url', placeholder: 'https://example.com', required: false },
@@ -202,6 +203,7 @@ const CompanyRegistrationForm: React.FC<{ onRegistered: () => void }> = ({ onReg
     </form>
   );
 };
+*/
 
 const MainApp: React.FC<MainAppProps> = ({ currentPage, setCurrentPage }) => {
   const [showCompanyModal, setShowCompanyModal] = useState(false);
@@ -224,10 +226,10 @@ const MainApp: React.FC<MainAppProps> = ({ currentPage, setCurrentPage }) => {
     }
   };
 
-  const handleCompanyRegistered = () => {
+  /*const handleCompanyRegistered = () => {
     setShowCompanyModal(false);
     setCurrentPage('Dashboard');
-  };
+  };*/
 
   const renderCurrentPage = () => {
     switch (currentPage) {
@@ -260,6 +262,7 @@ const MainApp: React.FC<MainAppProps> = ({ currentPage, setCurrentPage }) => {
           currentPage={currentPage}
           onNavClick={handleNavClick}
           onDashboardClick={handleDashboardClick}
+          setCurrentPage={setCurrentPage}
         />
       )}
       {renderCurrentPage()}
@@ -268,7 +271,7 @@ const MainApp: React.FC<MainAppProps> = ({ currentPage, setCurrentPage }) => {
           <DialogHeader>
             <DialogTitle style={{ fontSize: 26, fontWeight: 800, textAlign: 'center', marginBottom: 0, color: '#1e293b', letterSpacing: 0.3 }}>Register Your Company</DialogTitle>
           </DialogHeader>
-          <CompanyRegistrationForm onRegistered={handleCompanyRegistered} />
+         {/* <CompanyRegistrationForm onRegistered={handleCompanyRegistered} /> */}
           <DialogClose asChild>
             <button style={{ margin: '20px auto 0', display: 'block', background: 'none', border: 'none', color: '#2563eb', fontWeight: 700, fontSize: 17, cursor: 'pointer', letterSpacing: 0.2 }}>Close</button>
           </DialogClose>

@@ -44,6 +44,13 @@ const ComunityOverview: React.FC<ComunityOverviewProps> = ({
   const [selectedReadingTimes, setSelectedReadingTimes] = useState<string[]>([]);
   const [showToast, setShowToast] = useState('');
   const [isSaved, setIsSaved] = useState(false);
+  const { communities, loading, error, refetch, createCommunity } = useCommunities();
+  const { user } = useAuth();
+  const [newCommunityName, setNewCommunityName] = useState('');
+  const [newCommunityDesc, setNewCommunityDesc] = useState('');
+  const [newCommunityLogo, setNewCommunityLogo] = useState<File | null>(null);
+  const [createLoading, setCreateLoading] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
 
   const categories = [
     { id: 'all', label: 'All', count: 24 },
@@ -202,6 +209,36 @@ const ComunityOverview: React.FC<ComunityOverviewProps> = ({
     showToastMessage('All filters cleared');
   };
 
+  // Handle create community
+  const handleCreateCommunity = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCreateError(null);
+    if (!newCommunityName.trim() || !newCommunityDesc.trim() || !newCommunityLogo) {
+      setCreateError('All fields are required.');
+      return;
+    }
+    setCreateLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append('name', newCommunityName);
+      formData.append('description', newCommunityDesc);
+      formData.append('file', newCommunityLogo);
+      if (user && user._id) {
+        formData.append('userId', user._id);
+      }
+      await createCommunity(formData);
+      setNewCommunityName('');
+      setNewCommunityDesc('');
+      setNewCommunityLogo(null);
+      refetch();
+      showToastMessage('Community created!');
+    } catch (err: any) {
+      setCreateError(err.message || 'Failed to create community');
+    } finally {
+      setCreateLoading(false);
+    }
+  };
+
   return (
     <div className={styles.newsContainer}>
       {/* Toast Messages */}
@@ -210,6 +247,54 @@ const ComunityOverview: React.FC<ComunityOverviewProps> = ({
           {showToast}
         </div>
       )}
+
+      {/* Create Community Form */}
+      <section className={styles.createCommunitySection}>
+        <h2>Create a New Community</h2>
+        <form onSubmit={handleCreateCommunity} className={styles.createCommunityForm}>
+          <input
+            type="text"
+            placeholder="Community Name"
+            value={newCommunityName}
+            onChange={e => setNewCommunityName(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Description"
+            value={newCommunityDesc}
+            onChange={e => setNewCommunityDesc(e.target.value)}
+            required
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={e => setNewCommunityLogo(e.target.files?.[0] || null)}
+            required
+          />
+          <button type="submit" disabled={createLoading}>
+            {createLoading ? 'Creating...' : 'Create Community'}
+          </button>
+          {createError && <div className={styles.error}>{createError}</div>}
+        </form>
+      </section>
+
+      {/* Real Communities List */}
+      <section className={styles.communitiesListSection}>
+        <h2>Communities</h2>
+        {loading && <div>Loading communities...</div>}
+        {error && <div className={styles.error}>Error: {error}</div>}
+        {communities && communities.length > 0 ? (
+          <ul className={styles.communitiesList}>
+            {communities.map((community) => (
+              <li key={community._id} className={styles.communityItem}>
+                <div className={styles.communityName}>{community.name}</div>
+                <div className={styles.communityDesc}>{community.description}</div>
+                {/* Optionally show logo, members, etc. */}
+              </li>
+            ))}
+          </ul>
+        ) : !loading && <div>No communities found.</div>}
+      </section>
 
       {/* Categories Section */}
       <div className={styles.newsCategories}>

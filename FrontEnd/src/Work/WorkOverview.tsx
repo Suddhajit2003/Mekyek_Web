@@ -74,55 +74,63 @@ const WorkOverview: React.FC = () => {
   const [showJobDetails, setShowJobDetails] = useState<boolean>(false);
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
   const [activeMode, setActiveMode] = useState<string>('Job');
+  const { jobs, loading, error, refetch } = useJobs();
+
+  if (loading) {
+    return <div className={styles.loading}>Loading jobs...</div>;
+  }
+  if (error) {
+    return <div className={styles.error}>Error loading jobs: {error}</div>;
+  }
 
   // Mock data for different modes
-  const allJobs: JobApplication[] = [
-    {
-      id: 1,
-      title: "Senior Frontend Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      type: "Full-time",
-      level: "Senior Level",
-      salary: "$120,000 - $150,000",
-      industry: "Technology",
-      datePosted: "2024-01-15",
-      isRemote: false,
-      description: "We are looking for a Senior Frontend Developer to join our team. You will be responsible for building user interfaces, implementing features, and ensuring the overall performance of our web applications. Work with cutting-edge technologies and collaborate with a talented team.",
-      requirements: ["React", "TypeScript", "5+ years experience", "CSS/SCSS", "Git"],
-      benefits: ["Health Insurance", "401k", "Flexible Hours", "Remote Work Options", "Professional Development"]
-    },
-    {
-      id: 2,
-      title: "Product Manager",
-      company: "InnovateTech",
-      location: "San Francisco, CA",
-      type: "Full-time",
-      level: "Senior Level",
-      salary: "$120,000 - $150,000",
-      industry: "Technology",
-      datePosted: "2024-01-14",
-      isRemote: true,
-      description: "We are seeking a Product Manager to drive the development of our digital products. You will work closely with engineering, design, and marketing teams to define product strategy and roadmap. Lead cross-functional teams and make data-driven decisions.",
-      requirements: ["Product Strategy", "Agile/Scrum", "Analytics", "Leadership", "3+ years experience"],
-      benefits: ["Stock Options", "Health Insurance", "Unlimited PTO", "Remote Work", "Learning Budget"]
-    },
-    {
-      id: 3,
-      title: "UX/UI Designer",
-      company: "DesignHub",
-      location: "Austin, TX",
-      type: "Full-time",
-      level: "Mid Level",
-      salary: "$85,000 - $110,000",
-      industry: "Design",
-      datePosted: "2024-01-13",
-      isRemote: false,
-      description: "Join our creative team as a UX/UI Designer to create intuitive and engaging user experiences. You will collaborate with product managers and developers to design user-centered solutions. Work on exciting projects that impact millions of users.",
-      requirements: ["Figma", "Adobe Creative Suite", "User Research", "Prototyping", "2+ years experience"],
-      benefits: ["Creative Environment", "Design Tools Budget", "Conference Attendance", "Health Insurance", "Flexible Schedule"]
-    }
-  ];
+  // const allJobs: JobApplication[] = [
+  //   {
+  //     id: 1,
+  //     title: "Senior Frontend Developer",
+  //     company: "TechCorp Solutions",
+  //     location: "San Francisco, CA",
+  //     type: "Full-time",
+  //     level: "Senior Level",
+  //     salary: "$120,000 - $150,000",
+  //     industry: "Technology",
+  //     datePosted: "2024-01-15",
+  //     isRemote: false,
+  //     description: "We are looking for a Senior Frontend Developer to join our team. You will be responsible for building user interfaces, implementing features, and ensuring the overall performance of our web applications. Work with cutting-edge technologies and collaborate with a talented team.",
+  //     requirements: ["React", "TypeScript", "5+ years experience", "CSS/SCSS", "Git"],
+  //     benefits: ["Health Insurance", "401k", "Flexible Hours", "Remote Work Options", "Professional Development"]
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Product Manager",
+  //     company: "InnovateTech",
+  //     location: "San Francisco, CA",
+  //     type: "Full-time",
+  //     level: "Senior Level",
+  //     salary: "$120,000 - $150,000",
+  //     industry: "Technology",
+  //     datePosted: "2024-01-14",
+  //     isRemote: true,
+  //     description: "We are seeking a Product Manager to drive the development of our digital products. You will work closely with engineering, design, and marketing teams to define product strategy and roadmap. Lead cross-functional teams and make data-driven decisions.",
+  //     requirements: ["Product Strategy", "Agile/Scrum", "Analytics", "Leadership", "3+ years experience"],
+  //     benefits: ["Stock Options", "Health Insurance", "Unlimited PTO", "Remote Work", "Learning Budget"]
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "UX/UI Designer",
+  //     company: "DesignHub",
+  //     location: "Austin, TX",
+  //     type: "Full-time",
+  //     level: "Mid Level",
+  //     salary: "$85,000 - $110,000",
+  //     industry: "Design",
+  //     datePosted: "2024-01-13",
+  //     isRemote: false,
+  //     description: "Join our creative team as a UX/UI Designer to create intuitive and engaging user experiences. You will collaborate with product managers and developers to design user-centered solutions. Work on exciting projects that impact millions of users.",
+  //     requirements: ["Figma", "Adobe Creative Suite", "User Research", "Prototyping", "2+ years experience"],
+  //     benefits: ["Creative Environment", "Design Tools Budget", "Conference Attendance", "Health Insurance", "Flexible Schedule"]
+  //   }
+  // ];
 
   const allInternships: JobApplication[] = [
     {
@@ -224,13 +232,13 @@ const WorkOverview: React.FC = () => {
   const getCurrentData = () => {
     switch (activeMode) {
       case 'Job':
-        return allJobs;
+        return jobs || []; // Use jobs from backend
       case 'Internship':
         return allInternships;
       case 'Project':
         return allProjects;
       default:
-        return allJobs;
+        return jobs || []; // Use jobs from backend
     }
   };
 

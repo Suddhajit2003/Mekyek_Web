@@ -1,179 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNews, useAuth } from '../hooks/useApi';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useFeeds, useAuth } from '../hooks/useApi';
 import PostCreation from './PostCreation';
 import AnalyticsPopup from './AnalyticsPopup';
 import styles from './Css/Post.module.css';
-import { 
-  FaThumbsUp, 
-  FaComment, 
-  FaShare, 
-  FaEllipsisH,
-  FaBookmark,
-  FaGlobeAmericas,
-  FaUserFriends,
-  FaLock,
-  FaBriefcase,
-  FaChartLine,
-  FaCalendarAlt,
-  FaTasks,
-  FaUsers,
-  FaFileAlt,
-  FaHeart,
-  FaEye,
-  FaHandshake,
-  FaPaperPlane,
-  FaImages,
-  FaSmile,
-  FaInfo
+import {
+  FaThumbsUp, FaComment, FaShare, FaEllipsisH, FaBookmark, FaGlobeAmericas,
+  FaUserFriends, FaLock, FaBriefcase, FaChartLine, FaCalendarAlt, FaTasks,
+  FaUsers, FaFileAlt, FaHeart, FaEye, FaHandshake, FaPaperPlane, FaImages,
+  FaSmile, FaInfo
 } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-// Define proper post type
-interface PostType {
-  id: string;
-  author: {
-    name: string;
-    title: string;
-    avatar: string;
-    time: string;
-  };
-  content: string;
-  image?: string;
-  likes: number;
-  comments: number;
-  shares: number;
-  isLiked: boolean;
-  isSaved: boolean;
-  visibility?: 'public' | 'connections' | 'private';
-  postComments?: PostComment[];
-}
-
-// Comment interface
-interface PostComment {
-  id: string;
-  author: {
-    name: string;
-    avatar: string;
-  };
-  content: string;
-  time: string;
-  likes: number;
-  isLiked: boolean;
-}
-
-// Job Stats interface
-interface JobStats {
-  applied: number;
-  saved: number;
-  viewed: number;
-  interviews: number;
-}
-
-// Enhanced mock data with professional content
-const mockPosts: PostType[] = [
-  {
-    id: '1',
-    author: {
-      name: 'Sarah Johnson',
-      title: 'Senior UX Designer at Google',
-      avatar: 'SJ',
-      time: '2h'
-    },
-    content: 'Just wrapped up an incredible workshop on AI-powered design systems!\n\nKey takeaways:\n• AI can accelerate design workflows by 60%\n• User research remains irreplaceable\n• The future is collaborative, not competitive\n\nWhat\'s your experience with AI in design? Drop your thoughts below!\n\n#UXDesign #AIDesign #Innovation',
-    image: '/api/placeholder/600/400',
-    likes: 234,
-    comments: 47,
-    shares: 23,
-        isLiked: false,
-    isSaved: false,
-    visibility: 'public',
-    postComments: [
-      {
-        id: 'c1',
-        author: { name: 'Mike Chen', avatar: 'MC' },
-        content: 'This is so insightful! We\'ve been exploring AI in our design process too. The 60% efficiency gain is remarkable.',
-            time: '1h',
-        likes: 12,
-            isLiked: false
-      },
-      {
-        id: 'c2',
-        author: { name: 'Lisa Wang', avatar: 'LW' },
-        content: 'Great points! I agree that user research can\'t be replaced. AI should augment, not replace human insight.',
-        time: '45min',
-        likes: 8,
-        isLiked: true
-      }
-    ]
-  },
-  {
-    id: '2',
-    author: {
-      name: 'Michael Chen',
-      title: 'Engineering Manager at Tesla',
-      avatar: 'MC',
-      time: '5h'
-    },
-    content: 'Exciting milestone! Our autonomous driving team just achieved 99.97% accuracy in object detection.\n\nThis journey taught me:\n→ Innovation requires relentless iteration\n→ Diverse teams build better solutions\n→ Safety must always come first\n\nProud of this incredible team and what we\'re building for the future of transportation!\n\n#Innovation #AutonomousDriving #TeamWork',
-    image: '/api/placeholder/600/350',
-    likes: 892,
-    comments: 156,
-    shares: 78,
-    isLiked: true,
-    isSaved: true,
-    visibility: 'public',
-    postComments: [
-      {
-        id: 'c3',
-        author: { name: 'Alex Rodriguez', avatar: 'AR' },
-        content: 'Incredible achievement! The safety-first approach is exactly what the industry needs.',
-        time: '2h',
-        likes: 34,
-        isLiked: false
-      }
-    ]
-  },
-  {
-    id: '3',
-    author: {
-      name: 'Emily Rodriguez',
-      title: 'VP of Marketing at Spotify',
-      avatar: 'ER',
-      time: '8h'
-    },
-    content: 'Big news! We just crossed 500M active users worldwide!\n\nThis achievement reflects:\n✓ The power of music to connect us all\n✓ Our commitment to artist empowerment\n✓ Data-driven personalization at scale\n\nGrateful for our amazing team and the artists who make it all possible. Here\'s to the next chapter!\n\n#Spotify #Music #Milestone #Gratitude',
-    likes: 1247,
-    comments: 203,
-    shares: 95,
-        isLiked: false,
-    isSaved: false,
-    visibility: 'public',
-    postComments: []
-  },
-  {
-    id: '4',
-    author: {
-      name: 'David Kim',
-      title: 'Lead Data Scientist at Netflix',
-      avatar: 'DK',
-      time: '12h'
-    },
-    content: 'Mind-blowing revelation from our latest recommendation algorithm!\n\nWe discovered that viewer mood prediction improves content engagement by 40%. The key? Analyzing:\n\n• Viewing patterns\n• Time of day preferences  \n• Genre switching behavior\n• Device usage patterns\n\nMachine learning continues to amaze me every day! What\'s the most surprising data insight you\'ve discovered?\n\n#DataScience #MachineLearning #Netflix #Analytics',
-    likes: 567,
-    comments: 89,
-    shares: 34,
-    isLiked: true,
-    isSaved: true,
-    visibility: 'connections',
-    postComments: []
-  }
-];
-
-interface PostProps {
-  onPostCreated?: (post: PostType) => void;
-}
-
-// Mock data for right sidebar
 const trendingNews = [
   { id: 1, title: "AI job market grows 200% in Q2", time: "1h ago" },
   { id: 2, title: "Tech salaries hit record highs despite market shifts", time: "3h ago" },
@@ -183,231 +20,133 @@ const trendingNews = [
 ];
 
 const peopleYouMayKnow = [
-  {
-    id: 1,
-    avatar: "JD",
-    name: "Jennifer Davis",
-    title: "Product Manager at Amazon",
-    mutual: 12
-  },
-  {
-    id: 2,
-    avatar: "RK",
-    name: "Robert Kim",
-    title: "Senior Developer at Microsoft",
-    mutual: 8
-  },
-  {
-    id: 3,
-    avatar: "MP",
-    name: "Michelle Park",
-    title: "UX Designer at Adobe",
-    mutual: 5
-  },
-  {
-    id: 4,
-    avatar: "TS",
-    name: "Thomas Smith",
-    title: "Data Scientist at Tesla",
-    mutual: 3
-  }
+  { id: 1, avatar: "JD", name: "Jennifer Davis", title: "Product Manager at Amazon", mutual: 12 },
+  { id: 2, avatar: "RK", name: "Robert Kim", title: "Senior Developer at Microsoft", mutual: 8 },
+  { id: 3, avatar: "MP", name: "Michelle Park", title: "UX Designer at Adobe", mutual: 5 },
+  { id: 4, avatar: "TS", name: "Thomas Smith", title: "Data Scientist at Tesla", mutual: 3 }
 ];
 
-const mockFriends = [
-  { name: 'Emily Rodriguez', title: 'Marketing Director at TechCorp' },
-  { name: 'David Kim', title: 'Product Manager at StartupX' },
-  { name: 'Lisa Chen', title: 'Data Scientist at AnalyticsPro' },
-  { name: 'Sarah Johnson', title: 'Senior UX Designer at Google' },
-  { name: 'Michael Chen', title: 'Engineering Manager at Tesla' },
-];
-const mockFollowing = [
-  { name: 'Alex Morgan', title: 'Senior UX Designer at TechGrowth Inc.' },
-  { name: 'Jane Smith', title: 'UI Engineer at Facebook' },
-  { name: 'John Doe', title: 'Full Stack Dev at Amazon' },
-];
-
-function ListPopup({ open, onClose, title, list }) {
-  if (!open) return null;
-  return (
-    <div className={styles.popupOverlay}>
-      <div className={styles.popupCard}>
-        <div className={styles.popupHeader}>
-          <span>{title}</span>
-          <button className={styles.popupClose} onClick={onClose}>×</button>
-        </div>
-        <div className={styles.popupList}>
-          {list.map((item, i) => (
-            <div className={styles.popupListItem} key={i}>
-              <div className={styles.popupListName}>{item.name}</div>
-              <div className={styles.popupListTitle}>{item.title}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+interface JobStats {
+  applied: number;
+  saved: number;
+  viewed: number;
+  interviews: number;
 }
 
-const Post: React.FC<PostProps> = ({ onPostCreated }) => {
-  console.log('Post component rendering...');
-  
-  const { news, loading, error } = useNews();
+interface PostProps {
+  onNavigate: (page: string) => void;
+}
+
+const Post: React.FC<PostProps> = ({ onNavigate }) => {
+  const { feeds, loading, error, postFeed, likeFeed, commentFeed, refetch } = useFeeds();
   const { user } = useAuth();
-  const [posts, setPosts] = useState<PostType[]>(mockPosts);
-  const [jobStats, setJobStats] = useState<JobStats>({
-    applied: 12,
-    saved: 8,
-    viewed: 45,
-    interviews: 3
-  });
+  const [jobStats] = useState<JobStats>({ applied: 12, saved: 8, viewed: 45, interviews: 3 });
   const [expandedComments, setExpandedComments] = useState<Set<string>>(new Set());
   const [commentInputs, setCommentInputs] = useState<{ [key: string]: string }>({});
   const [showRepostModal, setShowRepostModal] = useState<string | null>(null);
   const [repostComment, setRepostComment] = useState('');
   const [showAnalyticsPopup, setShowAnalyticsPopup] = useState<boolean>(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  console.log('Post component state:', { posts: posts.length, user, loading, error });
-
+  // Logging for debugging
   useEffect(() => {
+    if (feeds) console.log('[Feeds] Loaded:', feeds);
+    if (error) console.error('[Feeds] Error:', error);
+  }, [feeds, error]);
+
+  // Defensive check for user
+  if (!user) {
+    console.error('[Home/Post] No user found in auth state.');
+  }
+
+  // Handle new post creation
+  const handleNewPost = useCallback(async (formData: FormData) => {
     try {
-      if (news && news.length > 0) {
-        // Transform news data to match our PostType interface
-        const transformedPosts = news.map((item: any, index: number) => ({
-          id: item.id || `news-${index}`,
-          author: {
-            name: item.author || 'Anonymous',
-            title: item.authorTitle || 'Professional',
-            avatar: item.author ? item.author.charAt(0).toUpperCase() : 'A',
-            time: item.createdAt ? new Date(item.createdAt).toLocaleDateString() : 'Recently'
-          },
-          content: item.content || item.title || '',
-          image: item.image || undefined,
-          likes: item.likes || Math.floor(Math.random() * 100),
-          comments: item.comments || Math.floor(Math.random() * 20),
-          shares: item.shares || Math.floor(Math.random() * 10),
-      isLiked: false,
-          isSaved: false,
-          visibility: 'public' as const,
-          postComments: []
-        }));
-        setPosts([...transformedPosts, ...mockPosts]);
-      }
+      await postFeed(formData);
+      refetch();
+      console.log('[Feeds] Post created');
     } catch (err) {
-      console.error('Error processing news data:', err);
+      console.error('[Feeds] Post creation failed:', err);
+      alert('Failed to create post');
     }
-  }, [news]);
+  }, [postFeed, refetch]);
 
-  const handleLike = (postId: string) => {
-    setPosts(prev => prev.map(post => 
-      post.id === postId 
-        ? { ...post, isLiked: !post.isLiked, likes: post.isLiked ? post.likes - 1 : post.likes + 1 }
-        : post
-    ));
-  };
+  // Handle like
+  const handleLike = useCallback(async (feedId: string) => {
+    if (!user) return;
+    try {
+      await likeFeed(feedId, user._id);
+      refetch();
+      console.log('[Feeds] Liked feed:', feedId);
+    } catch (err) {
+      console.error('[Feeds] Like failed:', err);
+      alert('Failed to like post');
+    }
+  }, [likeFeed, user, refetch]);
 
-  const handleSave = (postId: string) => {
-    setPosts(prev => prev.map(post => 
-      post.id === postId 
-        ? { ...post, isSaved: !post.isSaved }
-        : post
-    ));
-  };
+  // Handle comment
+  const handleCommentSubmit = useCallback(async (feedId: string) => {
+    if (!user) return;
+    const comment = commentInputs[feedId]?.trim();
+    if (!comment) return;
+    try {
+      await commentFeed(feedId, user._id, comment, `${user.firstName} ${user.lastName}`);
+      setCommentInputs(prev => ({ ...prev, [feedId]: '' }));
+      refetch();
+      console.log('[Feeds] Commented on feed:', feedId);
+    } catch (err) {
+      console.error('[Feeds] Comment failed:', err);
+      alert('Failed to comment');
+    }
+  }, [commentFeed, user, commentInputs, refetch]);
 
-  const handleCommentToggle = (postId: string) => {
+  const handleCommentToggle = (feedId: string) => {
     setExpandedComments(prev => {
       const newSet = new Set(prev);
-      if (newSet.has(postId)) {
-        newSet.delete(postId);
-      } else {
-        newSet.add(postId);
-      }
+      if (newSet.has(feedId)) newSet.delete(feedId);
+      else newSet.add(feedId);
       return newSet;
     });
   };
 
-  const handleCommentSubmit = (postId: string) => {
-    const comment = commentInputs[postId]?.trim();
-    if (!comment) return;
-
-    const newComment: PostComment = {
-      id: Date.now().toString(),
-      author: {
-        name: user?.name || 'You',
-        avatar: user?.name?.charAt(0).toUpperCase() || 'U'
-      },
-      content: comment,
-      time: 'Just now',
-      likes: 0,
-      isLiked: false
-    };
-
-    setPosts(prev => prev.map(post => 
-      post.id === postId 
-        ? { 
-            ...post, 
-            comments: post.comments + 1,
-            postComments: [...(post.postComments || []), newComment]
-          }
-        : post
-    ));
-
-    setCommentInputs(prev => ({ ...prev, [postId]: '' }));
+  const handleSave = (feedId: string) => {
+    // Implement save logic if backend supports it
+    alert('Save feature coming soon!');
   };
 
-  const handleRepost = (postId: string) => {
-    setShowRepostModal(postId);
-  };
-
-  const handleRepostSubmit = (postId: string) => {
-    setPosts(prev => prev.map(post => 
-      post.id === postId 
-        ? { ...post, shares: post.shares + 1 }
-        : post
-    ));
+  const handleRepost = (feedId: string) => setShowRepostModal(feedId);
+  const handleRepostSubmit = (feedId: string) => {
     setShowRepostModal(null);
     setRepostComment('');
+    alert('Repost feature coming soon!');
   };
 
-  const handleNewPost = (newPost: PostType) => {
-    setPosts(prev => [newPost, ...prev]);
-    if (onPostCreated) {
-      onPostCreated(newPost);
-    }
-  };
-
-  const handleViewAnalytics = () => {
-    setShowAnalyticsPopup(true);
-  };
-
-  const handleCloseAnalytics = () => {
-    setShowAnalyticsPopup(false);
-  };
+  const handleViewAnalytics = () => setShowAnalyticsPopup(true);
+  const handleCloseAnalytics = () => setShowAnalyticsPopup(false);
 
   const getVisibilityIcon = (visibility: string = 'public') => {
     switch (visibility) {
-      case 'public':
-        return <FaGlobeAmericas className={styles.visibilityIcon} />;
-      case 'connections':
-        return <FaUserFriends className={styles.visibilityIcon} />;
-      case 'private':
-        return <FaLock className={styles.visibilityIcon} />;
-      default:
-        return <FaGlobeAmericas className={styles.visibilityIcon} />;
+      case 'public': return <FaGlobeAmericas className={styles.visibilityIcon} />;
+      case 'connections': return <FaUserFriends className={styles.visibilityIcon} />;
+      case 'private': return <FaLock className={styles.visibilityIcon} />;
+      default: return <FaGlobeAmericas className={styles.visibilityIcon} />;
     }
   };
 
-  // When there's an error fetching data, we'll log it but still render the component
-  // with the mock data so the design can be reviewed.
-  if (error) {
-    console.warn('API Error:', error, 'Falling back to offline mock data.');
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.loading}>Loading posts...</div>
+      </div>
+    );
   }
 
-  if (loading) {
-  return (
-    <div className={styles.container}>
-        <div className={styles.loading}>Loading posts...</div>
-                </div>
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.error}>Error loading posts: {error}</div>
+        <button onClick={refetch} className={styles.retryButton}>Retry</button>
+      </div>
     );
   }
 
@@ -420,12 +159,15 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
           <div className={styles.profileBackground}></div>
           <div className={styles.profileInfo}>
             <div className={styles.profileAvatar}>
-              {user?.name?.charAt(0).toUpperCase() || 'U'}
+              {user?.profilePhoto ? (
+                <img src={user.profilePhoto} alt="Profile" className={styles.avatarImg} />
+              ) : (
+                user?.firstName?.charAt(0).toUpperCase() || 'U'
+              )}
             </div>
-            <h3 className={styles.profileName}>{user?.name || 'John Smith'}</h3>
+            <h3 className={styles.profileName}>{user ? `${user.firstName || 'User'} ${user.lastName || ''}` : 'John Smith'}</h3>
             <p className={styles.profileTitle}>{user?.title || 'Software Engineer at Mekyek'}</p>
           </div>
-          
           {/* Work Dashboard */}
           <div className={styles.workDashboard}>
             <h4 className={styles.dashboardTitle}>
@@ -438,83 +180,80 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
                 <div className={styles.statInfo}>
                   <p className={styles.statNumber}>{jobStats.applied}</p>
                   <p className={styles.statLabel}>Applied</p>
-            </div>
-          </div>
+                </div>
+              </div>
               <div className={styles.statCard}>
                 <div className={`${styles.statIcon} ${styles.savedIcon}`}><FaBookmark /></div>
                 <div className={styles.statInfo}>
                   <p className={styles.statNumber}>{jobStats.saved}</p>
                   <p className={styles.statLabel}>Saved</p>
-        </div>
-            </div>
+                </div>
+              </div>
               <div className={styles.statCard}>
                 <div className={`${styles.statIcon} ${styles.viewedIcon}`}><FaEye /></div>
                 <div className={styles.statInfo}>
                   <p className={styles.statNumber}>{jobStats.viewed}</p>
                   <p className={styles.statLabel}>Viewed</p>
-            </div>
-            </div>
+                </div>
+              </div>
               <div className={styles.statCard}>
                 <div className={`${styles.statIcon} ${styles.interviewIcon}`}><FaHandshake /></div>
                 <div className={styles.statInfo}>
                   <p className={styles.statNumber}>{jobStats.interviews}</p>
                   <p className={styles.statLabel}>Interviews</p>
-          </div>
-          </div>
-        </div>
+                </div>
+              </div>
+            </div>
             <div className={styles.dashboardActions}>
               <button className={styles.dashboardAction} onClick={handleViewAnalytics}>
                 <FaChartLine className={styles.actionIcon} /> View Analytics
               </button>
-                    </div>
-                  </div>
-                </div>
-
+            </div>
+          </div>
+        </div>
         {/* Quick Access Card */}
         <div className={styles.quickAccessCard}>
-          <div className={styles.quickAccessItem} onClick={() => navigate('/community')}><FaUsers /> Your community</div>
-          <div className={styles.quickAccessItem} onClick={() => navigate('/events')}><FaCalendarAlt /> Event</div>
+          <div className={styles.quickAccessItem} onClick={() => onNavigate('Community')}><FaUsers /> Your community</div>
+          <div className={styles.quickAccessItem} onClick={() => onNavigate('Events')}><FaCalendarAlt /> Event</div>
           <div className={styles.quickAccessItem}><FaFileAlt /> Your Courses</div>
-          <div className={styles.quickAccessItem} onClick={() => navigate('/friends')}><FaUserFriends /> Your Friend</div>
-          <div className={styles.quickAccessItem} onClick={() => navigate('/following')}><FaHeart /> Following</div>
+          <div className={styles.quickAccessItem} onClick={() => onNavigate('Friends')}><FaUserFriends /> Your Friend</div>
+          <div className={styles.quickAccessItem} onClick={() => onNavigate('Following')}><FaHeart /> Following</div>
         </div>
-                      </div>
+      </div>
 
       {/* Main Content */}
       <div className={styles.mainContent}>
         <PostCreation onPostCreated={handleNewPost} />
-        
         {/* Posts Feed */}
-        {posts.map((post) => (
-          <div key={post.id} className={styles.postCard}>
+        {feeds && feeds.length > 0 ? feeds.map((feed) => (
+          <div key={feed._id} className={styles.postCard}>
             {/* Post Header */}
             <div className={styles.postHeader}>
               <div className={styles.authorInfo}>
                 <div className={styles.avatar}>
-                  {post.author.avatar}
-              </div>
+                  {feed.author?.firstName?.charAt(0).toUpperCase() || 'U'}
+                </div>
                 <div className={styles.authorDetails}>
-                  <h4 className={styles.authorName}>{post.author.name}</h4>
-                  <p className={styles.authorTitle}>{post.author.title}</p>
+                  <h4 className={styles.authorName}>{feed.author?.firstName} {feed.author?.lastName}</h4>
+                  {/* feed.author.title is not present in Feed interface, so we use a fallback or remove */}
+                  {/* <p className={styles.authorTitle}>{feed.author?.title || ''}</p> */}
                   <div className={styles.postMeta}>
-                    <span className={styles.postTime}>{post.author.time}</span>
-                    <span className={styles.separator}>•</span>
-                    {getVisibilityIcon(post.visibility)}
+                    <span className={styles.postTime}>{feed.createdAt ? new Date(feed.createdAt).toLocaleString() : ''}</span>
+                    {/* <span className={styles.separator}>•</span> */}
+                    {/* feed.visibility is not present in Feed interface, so we remove the icon */}
+                    {/* {getVisibilityIcon(feed.visibility)} */}
+                  </div>
+                </div>
+              </div>
+              <button className={styles.moreButton}><FaEllipsisH /></button>
             </div>
-          </div>
-      </div>
-              <button className={styles.moreButton}>
-                <FaEllipsisH />
-              </button>
-            </div>
-            
             {/* Post Content */}
             <div className={styles.postContent}>
-              <p className={styles.postText}>{post.content}</p>
-              {post.image && (
+              <p className={styles.postText}>{feed.content}</p>
+              {feed.image && (
                 <div className={styles.postImageContainer}>
-                  <img 
-                    src={post.image} 
+                  <img
+                    src={feed.image}
                     alt="Post content"
                     className={styles.postImage}
                     onError={(e) => {
@@ -527,11 +266,10 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
                       e.currentTarget.parentElement!.innerHTML = '<span style="color: #666;">Image content</span>';
                     }}
                   />
-            </div>
+                </div>
               )}
-          </div>
-          
-          {/* Post Stats */}
+            </div>
+            {/* Post Stats */}
             <div className={styles.postStats}>
               <div className={styles.likesInfo}>
                 <div className={styles.likeReactions}>
@@ -539,87 +277,83 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
                   <span className={styles.likeIcon}>❤️</span>
                   <span className={styles.likeIcon}>🎉</span>
                   <span className={styles.likeIcon}>🚀</span>
-            </div>
-                <span className={styles.likesCount}>{post.likes.toLocaleString()}</span>
-          </div>
-              <div className={styles.statsRight}>
-                <span className={styles.commentCount} onClick={() => handleCommentToggle(post.id)}>
-                  {post.comments} comments
-                      </span>
-                <span className={styles.shareCount}>{post.shares} reposts</span>
-                  </div>
                 </div>
-
+                <span className={styles.likesCount}>{feed.likes?.toLocaleString() || 0}</span>
+              </div>
+              <div className={styles.statsRight}>
+                <span className={styles.commentCount} onClick={() => handleCommentToggle(feed._id)}>
+                  {feed.comments?.length || 0} comments
+                </span>
+                {/* feed.shares is not present in Feed interface, so we remove or default to 0 */}
+                {/* <span className={styles.shareCount}>{feed.shares || 0} reposts</span> */}
+              </div>
+            </div>
             {/* Post Actions */}
             <div className={styles.postActions}>
-                      <button 
-                className={`${styles.actionButton} ${post.isLiked ? styles.liked : ''}`}
-                onClick={() => handleLike(post.id)}
-                      >
+              <button className={styles.actionButton} onClick={() => handleLike(feed._id)}>
                 <FaThumbsUp className={styles.actionIcon} />
                 <span className={styles.actionText}>Like</span>
-                      </button>
-                <button 
-                className={styles.actionButton}
-                onClick={() => handleCommentToggle(post.id)}
-            >
-              <FaComment className={styles.actionIcon} />
-              <span className={styles.actionText}>Comment</span>
               </button>
-              <button 
-                className={styles.actionButton}
-                onClick={() => handleRepost(post.id)}
-            >
-              <FaShare className={styles.actionIcon} />
+              <button className={styles.actionButton} onClick={() => handleCommentToggle(feed._id)}>
+                <FaComment className={styles.actionIcon} />
+                <span className={styles.actionText}>Comment</span>
+              </button>
+              <button className={styles.actionButton} onClick={() => handleRepost(feed._id)}>
+                <FaShare className={styles.actionIcon} />
                 <span className={styles.actionText}>Repost</span>
               </button>
-                      <button 
-                className={`${styles.actionButton} ${post.isSaved ? styles.saved : ''}`}
-                onClick={() => handleSave(post.id)}
-                      >
+              <button className={styles.actionButton} onClick={() => handleSave(feed._id)}>
                 <FaBookmark className={styles.actionIcon} />
-                <span className={styles.actionText}>{post.isSaved ? 'Saved' : 'Save'}</span>
-                      </button>
-                    </div>
-
+                <span className={styles.actionText}>Save</span>
+              </button>
+            </div>
             {/* Comments Section */}
-            {expandedComments.has(post.id) && (
+            {expandedComments.has(feed._id) && (
               <div className={styles.commentsSection}>
                 <div className={styles.commentInput}>
                   <div className={styles.commentAvatar}>
-                    {user?.name?.charAt(0).toUpperCase() || 'U'}
+                    {user?.firstName?.charAt(0).toUpperCase() || 'U'}
                   </div>
                   <div className={styles.commentInputContainer}>
                     <input
                       type="text"
-                  placeholder="Write a comment..."
-                      value={commentInputs[post.id] || ''}
-                      onChange={(e) => setCommentInputs(prev => ({ ...prev, [post.id]: e.target.value }))}
+                      placeholder="Write a comment..."
+                      value={commentInputs[feed._id] || ''}
+                      onChange={(e) => setCommentInputs(prev => ({ ...prev, [feed._id]: e.target.value }))}
                       className={styles.commentInputField}
-                      onKeyPress={(e) => e.key === 'Enter' && handleCommentSubmit(post.id)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleCommentSubmit(feed._id)}
                     />
                     <div className={styles.commentActions}>
-                      <button className={styles.commentActionButton}>
-                        <FaImages />
-                      </button>
-                      <button className={styles.commentActionButton}>
-                        <FaSmile />
-                      </button>
-                <button 
+                      <button className={styles.commentActionButton}><FaImages /></button>
+                      <button className={styles.commentActionButton}><FaSmile /></button>
+                      <button
                         className={styles.commentSubmitButton}
-                        onClick={() => handleCommentSubmit(post.id)}
-                        disabled={!commentInputs[post.id]?.trim()}
+                        onClick={() => handleCommentSubmit(feed._id)}
+                        disabled={!commentInputs[feed._id]?.trim()}
                       >
                         <FaPaperPlane />
-                </button>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {/* Render comments */}
+                <div className={styles.commentsList}>
+                  {feed.comments && feed.comments.length > 0 ? feed.comments.map((c: any, idx: number) => (
+                    <div key={idx} className={styles.commentItem}>
+                      <div className={styles.commentAvatar}>{c.userName?.charAt(0).toUpperCase() || 'U'}</div>
+                      <div className={styles.commentContent}>
+                        <span className={styles.commentAuthor}>{c.userName}</span>
+                        <span className={styles.commentText}>{c.comment}</span>
+                        <span className={styles.commentTime}>{c.createdAt ? new Date(c.createdAt).toLocaleString() : ''}</span>
+                      </div>
+                    </div>
+                  )) : <div className={styles.noComments}>No comments yet.</div>}
+                </div>
               </div>
-            </div>
-          </div>
-      </div>
             )}
-            </div>
-        ))}
-        </div>
+          </div>
+        )) : <div>No posts found.</div>}
+      </div>
 
       {/* Right Sidebar */}
       <div className={styles.rightSidebar}>
@@ -627,9 +361,7 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
         <div className={styles.sidebarCard}>
           <div className={styles.sidebarTitle}>
             <h3>Trending News</h3>
-            <button className={styles.infoIcon}>
-              <FaInfo />
-            </button>
+            <button className={styles.infoIcon}><FaInfo /></button>
           </div>
           <div className={styles.newsList}>
             {trendingNews.map((news) => (
@@ -643,14 +375,11 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
             ))}
           </div>
         </div>
-
         {/* People You Know Card */}
         <div className={styles.sidebarCard}>
           <div className={styles.sidebarTitle}>
             <h3>People You May Know</h3>
-            <button className={styles.infoIcon}>
-              <FaInfo />
-            </button>
+            <button className={styles.infoIcon}><FaInfo /></button>
           </div>
           <div className={styles.peopleList}>
             {peopleYouMayKnow.map((person) => (
@@ -676,29 +405,29 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
             <div className={styles.repostModalHeader}>
               <h3>Repost to your network</h3>
               <button onClick={() => setShowRepostModal(null)}>×</button>
-                    </div>
+            </div>
             <div className={styles.repostModalBody}>
-                      <textarea
+              <textarea
                 placeholder="Add your thoughts..."
                 value={repostComment}
                 onChange={(e) => setRepostComment(e.target.value)}
                 className={styles.repostTextarea}
               />
-                    </div>
+            </div>
             <div className={styles.repostModalFooter}>
-                <button 
+              <button
                 className={styles.repostSubmitButton}
                 onClick={() => handleRepostSubmit(showRepostModal)}
-                >
+              >
                 Repost
-                </button>
-              </div>
+              </button>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
       {/* Analytics Popup */}
-      <AnalyticsPopup 
+      <AnalyticsPopup
         isOpen={showAnalyticsPopup}
         onClose={handleCloseAnalytics}
         jobStats={jobStats}

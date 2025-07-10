@@ -1,31 +1,303 @@
-# Logs
-logs
-*.log
+# Dependencies
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Environment variables and configuration
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+config.json
+secrets.json
 
-# Editor directories and files
+# Build outputs
+dist/
+build/
+out/
+
+# Logs
+logs/
+*.log
+access.log
+error.log
+combined.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+database.json
+dump.rdb
+
+# MongoDB specific
+data/
+mongod.lock
+
+# File uploads (Multer) - Based on your Controllers structure
+uploads/
+temp/
+tmp/
+public/uploads/
+static/uploads/
+assets/uploads/
+ProfileImages/
+CompanyDocuments/
+CompanyLogos/
+ATSFiles/
+CommunityImages/
+PostImages/
+FeedImages/
+
+# Google OAuth and API keys
+googleconfig.js
+google-credentials.json
+google-service-account.json
+client_secret.json
+credentials.json
+
+# Cloudinary configuration (keep config file, ignore cache)
+.cloudinary/
+cloudinary-cache/
+
+# Session store
+sessions/
+
+# Cache directories
+.cache/
+.eslintcache
+.stylelintcache
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.pnpm-store/
+.yarn/
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# IDE and Editor files
 .vscode/*
 !.vscode/extensions.json
-.idea
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.tmp
+*.temp
+
+# Windows
+*.exe
+*.msi
+*.msm
+*.msp
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+*.p12
+*.pfx
+
+# JWT keys
+private.key
+public.key
+jwtRS256.key
+jwtRS256.key.pub
+
+# Backup files
+*.backup
+*.bak
+*.old
+backup/
+
+# Docker
+Dockerfile.prod
+docker-compose.override.yml
+.dockerignore
+
+# Kubernetes
+*.yaml
+*.yml
+!package.yml
+!docker-compose.yml
+!.github/**/*.yml
+
+# Monitoring and APM
+newrelic.js
+newrelic_agent.log
+
+# PM2
+.pm2/
+pm2.json
+ecosystem.config.js
+
+# Serverless
+.serverless/
+.aws/
+
+# Testing
+test-results/
+.nyc_output/
+
+# Temporary folders
+tmp/
+temp/
+.tmp/
+
+# Local configuration
+.local
+*.local
+
+# Miscellaneous
+*.sublime-project
+*.sublime-workspace
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# TypeScript
+*.tsbuildinfo
 
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env.test
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# ATS specific files
+ATS/temp/
+ATS/uploads/
+ATS/cache/
+resume-parser-cache/
+cv-analysis/
+
+# Company specific uploads
+Company/uploads/
+Company/documents/
+Company/logos/
+
+# Community content
+Community/uploads/
+Community/temp/
+
+# Health check files
+health.json
+status.json
+
+# Migration files (if using database migrations)
+migrations/data/
+seeds/data/
+
+# Email templates cache
+.email-templates/
+
+# Redis dump
+dump.rdb
+
+# Elasticsearch
+elasticsearch/
+
+# Mail service
+.mail/
+
+# Webhook logs
+webhook.log
+
+# Rate limiting cache
+.rate-limit-cache/
+
+# API documentation build
+docs/build/
+api-docs/
+
+# Swagger generated files
+swagger.json
+swagger.yaml
+
+# Socket.io temporary files
+socket.io.log
+
+# Cluster logs
+cluster.log
+
+# Memory dumps
+heapdump-*
+*.heapsnapshot
+
+# Profiling
+isolate-*
+v8.log
+
+# file validation or processing
+file-validation-cache/
+image-processing-temp/
+pdf-processing-temp/
+
+# email templates
+email-templates/compiled/

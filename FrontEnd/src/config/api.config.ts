@@ -1,19 +1,16 @@
 // API Configuration
 export const API_CONFIG = {
   // Base URL for your backend API
-  BASE_URL: process.env.NODE_ENV === 'production' 
-    ? 'https://your-production-api.com/api' 
-    : 'http://localhost:5000',
-  
+  BASE_URL: 'http://localhost:5000/api',
   // Request timeout in milliseconds
   TIMEOUT: 10000,
-  
+
   // Default headers
   DEFAULT_HEADERS: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
-  
+
   // API endpoints
   ENDPOINTS: {
     // Authentication
@@ -22,7 +19,7 @@ export const API_CONFIG = {
       SIGNUP: '/auth/signup',
       GOOGLE_LOGIN: '/auth/google',
     },
-    
+
     // Profile
     PROFILE: {
       UPDATE: '/profile/update',
@@ -35,7 +32,7 @@ export const API_CONFIG = {
       REJECT_FRIEND: '/profile/reject-friend',
       FRIENDS: '/profile/friends',
     },
-    
+
     // Posts
     POSTS: {
       NEWS: '/posts/news',
@@ -45,7 +42,7 @@ export const API_CONFIG = {
       COMMENT_NEWS: '/posts/comment-news',
       COMMENTS: '/posts/comments',
     },
-    
+
     // Feeds
     FEEDS: {
       GET: '/feeds/getFeeds',
@@ -54,17 +51,17 @@ export const API_CONFIG = {
       COMMENT: '/feeds/comment',
       COMMENTS: '/feeds/comments',
     },
-    
+
     // Community
     COMMUNITY: {
       GET: '/community/get',
       CREATE: '/community/create',
-      POST: '/community/post',
-      LIKE: '/community/like',
-      COMMENT: '/community/comment',
-      COMMENTS: '/community/comments',
+      POST: '/community/post/create',  // Changed
+      LIKE: '/community/post/like',    // Changed
+      COMMENT: '/community/post/commentPost',  // Changed
+      COMMENTS: '/community/post/getComments'  // Changed
     },
-    
+
     // Company
     COMPANY: {
       REGISTER: '/company/register',
@@ -73,15 +70,15 @@ export const API_CONFIG = {
       TEAM_MEMBERS: '/company/team-members',
       DOCUMENTS: '/company/documents',
     },
-    
+
     // ATS (Applicant Tracking System)
     ATS: {
-      COMPANY_JOBS: '/ats/get-company-jobs',
-      APPLICANTS: '/ats/applicants',
-      ALL_POSTS: '/ats/get-all-posts',
+      COMPANY_JOBS: '/ATS/get-company-jobs',
+      APPLICANTS: '/ATS/applicants',
+      ALL_POSTS: '/ATS/get-all-posts',
     },
   },
-  
+
   // Error messages
   ERROR_MESSAGES: {
     NETWORK_ERROR: 'Network error. Please check your internet connection.',
@@ -92,7 +89,7 @@ export const API_CONFIG = {
     TIMEOUT: 'Request timeout. Please try again.',
     UNKNOWN_ERROR: 'An unknown error occurred.',
   },
-  
+
   // HTTP Status codes
   HTTP_STATUS: {
     OK: 200,
@@ -103,33 +100,33 @@ export const API_CONFIG = {
     NOT_FOUND: 404,
     INTERNAL_SERVER_ERROR: 500,
   },
-  
+
   // Local storage keys
   STORAGE_KEYS: {
     TOKEN: 'token',
     USER_DATA: 'userData',
     REFRESH_TOKEN: 'refreshToken',
   },
-  
+
   // File upload settings
   FILE_UPLOAD: {
     MAX_SIZE: 5 * 1024 * 1024, // 5MB
     ALLOWED_IMAGE_TYPES: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
     ALLOWED_DOCUMENT_TYPES: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
   },
-  
+
   // Pagination
   PAGINATION: {
     DEFAULT_PAGE_SIZE: 10,
     MAX_PAGE_SIZE: 100,
   },
-  
+
   // Rate limiting
   RATE_LIMIT: {
     REQUESTS_PER_MINUTE: 60,
     REQUESTS_PER_HOUR: 1000,
   },
-  
+
   // Feature flags
   FEATURES: {
     ENABLE_GOOGLE_LOGIN: true,

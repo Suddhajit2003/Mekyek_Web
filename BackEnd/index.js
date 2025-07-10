@@ -9,7 +9,7 @@ const companyRoutes = require('./Routes/CompanyRouter.js');
 const ATSRouter = require('./Routes/ATSRouter.js');
 const profileRoutes = require('./Routes/ProfileRouter.js');
 const feedsRoutes = require('./Routes/FeedsRouter.js');
-const ComunityRouter = require('./Routes/ComunityRouter.js');
+const CommunityRouter = require('./Routes/CommunityRouter.js');
 require('./mongodb.js');
 
 dotenv.config();
@@ -30,12 +30,12 @@ const apiRouter = express.Router();
 apiRouter.use('/auth', authRoutes);
 apiRouter.use('/posts', postRoutes);
 // Using feedsRoutes for the '/news' endpoint as it seems to be the most relevant
-apiRouter.use('/news', feedsRoutes); 
+//apiRouter.use('/news', feedsRoutes); 
 apiRouter.use('/company', companyRoutes);
 apiRouter.use('/ATS', ATSRouter);
 apiRouter.use('/profile', profileRoutes);
 apiRouter.use('/feeds', feedsRoutes);
-apiRouter.use('/comunity', ComunityRouter);
+apiRouter.use('/community', CommunityRouter);
 
 app.use('/api', apiRouter);
 

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styles from './Css/LoginSignupModal.module.css';
 import apiService from '../api';
 
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com'; // <-- Replace with your real client ID
+
 interface LoginSignupModalProps {
   open: boolean;
   onClose: () => void;
@@ -11,11 +13,15 @@ interface LoginSignupModalProps {
 
 const LoginSignupModal: React.FC<LoginSignupModalProps> = ({ open, onClose, onLoginSuccess, onSwitchToSignup }) => {
   const [mode, setMode] = useState<'candidate' | 'recruiter'>('candidate');
+  const [formMode, setFormMode] = useState<'login' | 'signup'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   if (!open) return null;
 
@@ -23,14 +29,93 @@ const LoginSignupModal: React.FC<LoginSignupModalProps> = ({ open, onClose, onLo
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
     try {
-      await apiService.login(email, password);
-      if (onLoginSuccess) onLoginSuccess();
-      onClose();
+      if (formMode === 'login') {
+        // Login logic
+        const { user, token } = await apiService.login(email, password, remember);
+        if (onLoginSuccess) onLoginSuccess();
+        onClose();
+      } else {
+        const userData = {
+          firstName,
+          lastName,
+          email,
+          password,
+          // Add default values for optional fields
+          phoneNumber: '', // Optional in your schema
+          country: '',     // Optional
+          gender: 'Other' // Default value
+        };
+        
+        const { user, token } = await apiService.signup({ firstName, lastName, email, password }, remember);
+        setFormMode('login');
+        setSuccess('Sign up successful! Please log in.');
+        resetForm();
+      }
     } catch (err: any) {
-      setError(err.message || 'Login failed');
+      setError(err.message || (formMode === 'login' ? 'Login failed' : 'Sign up failed'));
     } finally {
       setLoading(false);
+    }
+  };
+
+   const resetForm = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      // Google's OAuth 2.0 endpoint for requesting an access token
+      const redirectUri = window.location.origin; // or use a dedicated redirect page
+      const scope = 'profile email';
+      const url =
+        `https://accounts.google.com/o/oauth2/v2/auth?` +
+        `client_id=${GOOGLE_CLIENT_ID}` +
+        `&redirect_uri=${redirectUri}` +
+        `&response_type=code` +
+        `&scope=${encodeURIComponent(scope)}` +
+        `&access_type=offline`;
+
+      // Open popup
+      const width = 500, height = 600;
+      const left = window.screenX + (window.outerWidth - width) / 2;
+      const top = window.screenY + (window.outerHeight - height) / 2.5;
+      const popup = window.open(
+        url,
+        'google_oauth',
+        `width=${width},height=${height},left=${left},top=${top}`
+      );
+
+      // Listen for code in URL
+      const pollTimer = window.setInterval(async function () {
+        try {
+          if (!popup || popup.closed) {
+            window.clearInterval(pollTimer);
+            return;
+          }
+          const popupUrl = popup.location.href;
+          if (popupUrl.indexOf('?code=') !== -1) {
+            window.clearInterval(pollTimer);
+            const urlParams = new URLSearchParams(popup.location.search);
+            const code = urlParams.get('code');
+            popup.close();
+            if (code) {
+              // Send code to backend
+              const { user, token } = await apiService.googleLogin(code);
+              if (onLoginSuccess) onLoginSuccess();
+              onClose();
+            }
+          }
+        } catch (err) {
+          // Ignore cross-origin errors until redirected back
+        }
+      }, 500);
+    } catch (err: any) {
+      setError('Google sign-in failed');
     }
   };
 
@@ -123,7 +208,7 @@ const LoginSignupModal: React.FC<LoginSignupModalProps> = ({ open, onClose, onLo
           <span className={styles.orText}>Or</span>
         </div>
         {/* Google Sign In */}
-        <button className={styles.googleButton}>
+        <button className={styles.googleButton} onClick={handleGoogleSignIn}>
           <span className={styles.googleIcon}>
             <svg width="32" height="32" viewBox="0 0 65 65" fill="none">
               <circle cx="32.5" cy="32.5" r="32.5" fill="#fff"/>

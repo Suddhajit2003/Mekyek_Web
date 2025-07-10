@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '../hooks/useApi';
 import styles from './Css/Navbar.module.css';
 import mekyekLogo from '../assets/Mekyek.png';
 import { FaSearch, FaBell, FaMoon, FaSun, FaEllipsisV, FaCog, FaShieldAlt, FaQuestionCircle, FaSignOutAlt, FaBriefcase } from 'react-icons/fa';
@@ -8,10 +9,12 @@ interface NavbarProps {
   currentPage?: string;
   onNavClick?: (page: string) => void;
   onDashboardClick?: () => void;
+  setCurrentPage?: (page: string) => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onProfileClick, currentPage = 'Home', onNavClick, onDashboardClick }) => {
+const Navbar: React.FC<NavbarProps> = ({ onProfileClick, currentPage = 'Home', onNavClick, onDashboardClick, setCurrentPage }) => {
   const [showOptions, setShowOptions] = React.useState(false);
+  const { logout, isAuthenticated } = useAuth();
   const optionsRef = React.useRef<HTMLDivElement>(null);
   const [isDark, setIsDark] = React.useState(false);
 
@@ -66,6 +69,11 @@ const Navbar: React.FC<NavbarProps> = ({ onProfileClick, currentPage = 'Home', o
       onNavClick(page);
     }
   };
+  
+  const handleSignOut = () => {
+    logout();
+    if (setCurrentPage) setCurrentPage('Landing');
+  };
 
   return (
     <nav className={styles.navBar}>
@@ -75,43 +83,43 @@ const Navbar: React.FC<NavbarProps> = ({ onProfileClick, currentPage = 'Home', o
           <span className={styles.Mekyek}>Mekyek.</span>
         </div>
         <div className={styles.navItems}>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className={currentPage === 'Home' ? styles.Home : styles.navItem}
             onClick={(e) => { e.preventDefault(); handleNavItemClick('Home'); }}
           >
             Home
           </a>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className={currentPage === 'News' ? styles.Home : styles.navItem}
             onClick={(e) => { e.preventDefault(); handleNavItemClick('News'); }}
           >
             News
           </a>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className={currentPage === 'Community' ? styles.Home : styles.navItem}
             onClick={(e) => { e.preventDefault(); handleNavItemClick('Community'); }}
           >
             Community
           </a>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className={currentPage === 'Learn' ? styles.Home : styles.navItem}
             onClick={(e) => { e.preventDefault(); handleNavItemClick('Learn'); }}
           >
             Learn
           </a>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className={currentPage === 'Events' ? styles.Home : styles.navItem}
             onClick={(e) => { e.preventDefault(); handleNavItemClick('Events'); }}
           >
             Events
           </a>
-          <a 
-            href="#" 
+          <a
+            href="#"
             className={currentPage === 'Work' ? styles.Home : styles.navItem}
             onClick={(e) => { e.preventDefault(); handleNavItemClick('Work'); }}
           >
@@ -123,9 +131,9 @@ const Navbar: React.FC<NavbarProps> = ({ onProfileClick, currentPage = 'Home', o
       <div className={styles.rightSection}>
         <div className={styles.search}>
           <FaSearch className={styles.searchIcon} />
-          <input 
-            type="text" 
-            placeholder="Search..." 
+          <input
+            type="text"
+            placeholder="Search..."
             className={styles.Search}
           />
         </div>
@@ -136,7 +144,7 @@ const Navbar: React.FC<NavbarProps> = ({ onProfileClick, currentPage = 'Home', o
           ) : (
             <FaMoon className={styles.icon} style={{ color: '#00296B', cursor: 'pointer' }} onClick={toggleDarkMode} title="Switch to dark mode" />
           )}
-          <div 
+          <div
             className={styles.pfp}
             onClick={handleProfileClick}
           ></div>
@@ -165,30 +173,34 @@ const Navbar: React.FC<NavbarProps> = ({ onProfileClick, currentPage = 'Home', o
                   gap: 8,
                 }}
               >
-                <div style={{display: 'flex', alignItems: 'center', gap: 6, height: 30, padding: 0, cursor: 'pointer'}} onClick={() => setShowOptions(false)}>
-                  <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, padding: 4}}><FaCog style={{color: '#00296B', fontSize: 22}} /></span>
-                  <span style={{fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI'}}>Account Settings</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 30, padding: 0, cursor: 'pointer' }} onClick={() => setShowOptions(false)}>
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, padding: 4 }}><FaCog style={{ color: '#00296B', fontSize: 22 }} /></span>
+                  <span style={{ fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI' }}>Account Settings</span>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', gap: 6, height: 30, padding: 0, cursor: 'pointer'}} onClick={() => {
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 30, padding: 0, cursor: 'pointer' }} onClick={() => {
                   setShowOptions(false);
                   if (onDashboardClick) {
                     onDashboardClick();
                   }
                 }}>
-                  <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, padding: 4}}><FaBriefcase style={{color: '#00296B', fontSize: 22}} /></span>
-                  <span style={{fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI'}}>Company Dashboard</span>
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, padding: 4 }}><FaBriefcase style={{ color: '#00296B', fontSize: 22 }} /></span>
+                  <span style={{ fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI' }}>Company Dashboard</span>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', gap: 6, height: 36, padding: 0, cursor: 'pointer'}} onClick={() => setShowOptions(false)}>
-                  <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 36, padding: 4}}><FaShieldAlt style={{color: '#00296B', fontSize: 22}} /></span>
-                  <span style={{fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI'}}>Privacy</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 36, padding: 0, cursor: 'pointer' }} onClick={() => setShowOptions(false)}>
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 36, padding: 4 }}><FaShieldAlt style={{ color: '#00296B', fontSize: 22 }} /></span>
+                  <span style={{ fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI' }}>Privacy</span>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', gap: 6, height: 30, padding: 0, cursor: 'pointer'}} onClick={() => setShowOptions(false)}>
-                  <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, padding: 4}}><FaQuestionCircle style={{color: '#00296B', fontSize: 22}} /></span>
-                  <span style={{fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI'}}>Help Center</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 30, padding: 0, cursor: 'pointer' }} onClick={() => setShowOptions(false)}>
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 30, padding: 4 }}><FaQuestionCircle style={{ color: '#00296B', fontSize: 22 }} /></span>
+                  <span style={{ fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI' }}>Help Center</span>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', gap: 6, height: 28, padding: 0, cursor: 'pointer'}} onClick={() => setShowOptions(false)}>
-                  <span style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 28, padding: 4}}><FaSignOutAlt style={{color: '#00296B', fontSize: 22}} /></span>
-                  <span style={{fontSize: 18, color: '#00296B', fontFamily: 'Segoe UI'}}>Sign Out</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 28, padding: 0, cursor: 'pointer' }} onClick={() => setShowOptions(false)}>
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 30, height: 28, padding: 4 }}><FaSignOutAlt style={{ color: '#00296B', fontSize: 22 }} /></span>
+                  {isAuthenticated && (
+                    <button onClick={handleSignOut} className="signout-btn">
+                      Sign Out
+                    </button>
+                  )}
                 </div>
               </div>
             )}

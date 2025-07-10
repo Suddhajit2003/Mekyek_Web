@@ -123,6 +123,17 @@ const postProfile = wrapAsync(async (req, res) => {
   user = await UserModal.findOne({ _id: data.userId });
 
   if (user) {
+    // Only check for duplicate email if the email is being changed
+    if (data.email && data.email !== user.email) {
+      const existingEmailUser = await UserModal.findOne({ email: data.email });
+      if (existingEmailUser && existingEmailUser._id.toString() !== user._id.toString()) {
+        return res.status(400).json({ error: 'Email already in use by another user.' });
+      }
+    }
+    // Always preserve the existing email if not provided
+    if (!data.email) {
+      data.email = user.email;
+    }
     await UserModal.findOneAndUpdate({ _id: data.userId }, data);
   } else {
     user = await UserModal.create(data);

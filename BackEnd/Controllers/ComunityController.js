@@ -7,6 +7,10 @@ const wrapAsync = require('../utils/wrapAsync');
 const createCommunity = async (req, res) => {
     console.log("Processing Comunity Post in controller...");
 
+    if (!req.body.userId) {
+        return res.status(400).json({ success: false, message: 'userId is required' });
+    }
+
     const newComunity = new ComunityModal({
         name: req.body.name,
         description: req.body.description,
@@ -22,10 +26,10 @@ const createCommunity = async (req, res) => {
     try {
         const savedComunity = await newComunity.save();
         console.log("✅ Comunity saved successfully:", savedComunity);
-        res.status(201).json(savedComunity);
+        res.status(201).json({ success: true, community: savedComunity });
     } catch (error) {
         console.error("❌ Error saving Comunity:", error.message);
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ success: false, message: error.message });
     }
 };
 

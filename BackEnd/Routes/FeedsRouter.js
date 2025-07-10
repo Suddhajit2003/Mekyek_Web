@@ -19,8 +19,6 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({ storage: storage });
 
-module.exports = upload;
-
 router.post('/post', upload.single('file'), (req, res, next) => {
     console.log("Processing Feed Post...");
     console.log("Req Body", req.body);
@@ -28,16 +26,12 @@ router.post('/post', upload.single('file'), (req, res, next) => {
     if (!req.file) {
         console.error("❌ File upload failed! No file received.");
     }
-
     next();
 }, postFeed);
 
 router.get('/getFeeds', getFeeds);
-
 router.post('/like', likeFeed);
-
 router.post('/commentPost', commentPostFeed);
-
 router.get('/getComments', getComments);    
 
 

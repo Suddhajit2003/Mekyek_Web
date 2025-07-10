@@ -127,35 +127,25 @@ const PostCreation: React.FC<PostCreationProps> = ({ onPostCreated }) => {
     setIsLoading(true);
     
     try {
-      // Simulate API call
-      const newPost = {
-        id: Date.now().toString(),
-        author: {
-          name: user?.name || 'You',
-          title: user?.title || 'Professional',
-          avatar: user?.name?.charAt(0).toUpperCase() || 'U',
-          time: 'Just now'
-        },
-        content: content.trim(),
-        image: previewUrls[0] || undefined,
-        gif: selectedGif || undefined,
-        likes: 0,
-        comments: 0,
-        shares: 0,
-        isLiked: false,
-        visibility: visibility,
-        feeling: feeling,
-        location: location,
-        taggedPeople: taggedPeople,
-        event: eventData.title ? { ...eventData } : undefined,
-      };
-      
-      // Call parent component callback
-      if (onPostCreated) {
-        onPostCreated(newPost);
+      if (!user) {
+        console.error('[PostCreation] No user found in auth state.');
+        alert('User not authenticated. Please log in again.');
+        setIsLoading(false);
+        return;
       }
-      
-      // Reset form
+      const formData = new FormData();
+      formData.append('content', content.trim());
+      formData.append('firstName', user.firstName || '');
+      formData.append('lastName', user.lastName || '');
+      formData.append('profilePhoto', user.profilePhoto || '');
+      formData.append('userId', user._id || '');
+      if (selectedFiles.length > 0) {
+        formData.append('file', selectedFiles[0]);
+      }
+      // Optionally, you can add gif, feeling, location, etc. if backend supports
+      if (onPostCreated) {
+        onPostCreated(formData);
+      }
       handleCloseModal();
       
     } catch (error) {

@@ -29,6 +29,12 @@ const Newsoverview: React.FC<NewsoverviewProps> = ({
     readLater: 8,
     history: 45
   });
+  const { news, loading, error, refetch, postNews, likeNews, commentNews } = useNews();
+  const { user } = useAuth();
+  const [newsContent, setNewsContent] = useState('');
+  const [newsImage, setNewsImage] = useState<File | null>(null);
+  const [createLoading, setCreateLoading] = useState(false);
+  const [createError, setCreateError] = useState<string | null>(null);
 
   const categories = [
     { id: 'all', label: 'All', count: 24 },
@@ -201,6 +207,59 @@ const Newsoverview: React.FC<NewsoverviewProps> = ({
     }
   };
 
+  // Handle create news
+  const handleCreateNews = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setCreateError(null);
+    if (!newsContent.trim() || !newsImage) {
+      setCreateError('All fields are required.');
+      return;
+    }
+    setCreateLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append('content', newsContent);
+      if (user) {
+        formData.append('firstName', user.firstName || '');
+        formData.append('lastName', user.lastName || '');
+        formData.append('userPhoto', user.profilePhoto || '');
+        formData.append('userId', user._id || '');
+      }
+      formData.append('file', newsImage);
+      await postNews(formData);
+      setNewsContent('');
+      setNewsImage(null);
+      refetch();
+      showToastMessage('News posted!');
+    } catch (err: any) {
+      setCreateError(err.message || 'Failed to post news');
+    } finally {
+      setCreateLoading(false);
+    }
+  };
+
+  // Like handler
+  const handleLikeNews = async (newsId: string) => {
+    if (!user) return;
+    try {
+      await likeNews(newsId, user._id);
+      refetch();
+    } catch (err) {
+      showToastMessage('Failed to like news');
+    }
+  };
+
+  // Comment handler
+  const handleCommentNews = async (newsId: string, comment: string) => {
+    if (!user) return;
+    try {
+      await commentNews(newsId, user._id, comment, `${user.firstName} ${user.lastName}`);
+      refetch();
+    } catch (err) {
+      showToastMessage('Failed to comment');
+    }
+  };
+
   return (
     <div className={styles.newsContainer}>
       {/* Toast Messages */}
@@ -209,6 +268,60 @@ const Newsoverview: React.FC<NewsoverviewProps> = ({
           {showToast}
         </div>
       )}
+
+      {/* Create News Form */}
+      <section className={styles.createNewsSection}>
+        <h2>Create News</h2>
+        <form onSubmit={handleCreateNews} className={styles.createNewsForm}>
+          <textarea
+            placeholder="What's the news?"
+            value={newsContent}
+            onChange={e => setNewsContent(e.target.value)}
+            required
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={e => setNewsImage(e.target.files?.[0] || null)}
+            required
+          />
+          <button type="submit" disabled={createLoading}>
+            {createLoading ? 'Posting...' : 'Post News'}
+          </button>
+          {createError && <div className={styles.error}>{createError}</div>}
+        </form>
+      </section>
+
+      {/* Real News List */}
+      <section className={styles.newsListSection}>
+        <h2>Latest News</h2>
+        {loading && <div>Loading news...</div>}
+        {error && <div className={styles.error}>Error: {error}</div>}
+        {news && news.length > 0 ? (
+          <ul className={styles.newsList}>
+            {news.map((item) => (
+              <li key={item._id} className={styles.newsItem}>
+                <NewsCard
+                  // Pass real data and handlers
+                  category={{ name: 'News', color: 'technology' }}
+                  publication={item.author?.firstName + ' ' + item.author?.lastName}
+                  date={item.createdAt ? new Date(item.createdAt).toLocaleDateString() : ''}
+                  title={item.content}
+                  description={item.content}
+                  imageUrl={item.newsPhoto || ''}
+                  cardIndex={0}
+                  initialLikes={item.likes}
+                  initialComments={item.comments?.length || 0}
+                  onClick={() => {}}
+                  // Real like/comment handlers
+                  onLike={() => handleLikeNews(item._id)}
+                  onComment={(comment) => handleCommentNews(item._id, comment)}
+                />
+              </li>
+            ))}
+          </ul>
+        ) : !loading && <div>No news found.</div>}
+      </section>
 
       {/* News Categories Section */}
       <div className={styles.newsCategories}>
