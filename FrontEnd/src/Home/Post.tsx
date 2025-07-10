@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNews, useAuth } from '../hooks/useApi';
 import PostCreation from './PostCreation';
+import AnalyticsPopup from './AnalyticsPopup';
 import styles from './Css/Post.module.css';
 import { 
   FaThumbsUp, 
@@ -227,6 +228,7 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
   const [commentInputs, setCommentInputs] = useState<{ [key: string]: string }>({});
   const [showRepostModal, setShowRepostModal] = useState<string | null>(null);
   const [repostComment, setRepostComment] = useState('');
+  const [showAnalyticsPopup, setShowAnalyticsPopup] = useState<boolean>(false);
 
   console.log('Post component state:', { posts: posts.length, user, loading, error });
 
@@ -337,6 +339,14 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
     }
   };
 
+  const handleViewAnalytics = () => {
+    setShowAnalyticsPopup(true);
+  };
+
+  const handleCloseAnalytics = () => {
+    setShowAnalyticsPopup(false);
+  };
+
   const getVisibilityIcon = (visibility: string = 'public') => {
     switch (visibility) {
       case 'public':
@@ -416,7 +426,7 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
           </div>
         </div>
             <div className={styles.dashboardActions}>
-              <button className={styles.dashboardAction}>
+              <button className={styles.dashboardAction} onClick={handleViewAnalytics}>
                 <FaChartLine className={styles.actionIcon} /> View Analytics
               </button>
                     </div>
@@ -647,6 +657,13 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
             </div>
           </div>
         )}
+
+      {/* Analytics Popup */}
+      <AnalyticsPopup 
+        isOpen={showAnalyticsPopup}
+        onClose={handleCloseAnalytics}
+        jobStats={jobStats}
+      />
     </div>
   );
 };
