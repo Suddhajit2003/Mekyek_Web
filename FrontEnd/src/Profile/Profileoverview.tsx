@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Css/Profileoverview.module.css';
+import { useProfile, useAuth } from '../hooks/useApi';
+import { apiService } from '../api';
 
 const initialProfile = {
   about: `Passionate UX Designer with 8+ years of experience creating user-centered digital experiences for leading tech companies. Specialized in product design, user research, and design systems. Committed to crafting intuitive interfaces that solve real user problems while achieving business goals.`,

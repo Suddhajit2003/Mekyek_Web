@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Css/EventElement.module.css';
+import { useEvents, useAuth } from '../hooks/useApi';
+import { apiService } from '../api';
 
 interface Event {
   id: number;

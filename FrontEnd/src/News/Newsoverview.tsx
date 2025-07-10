@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './Css/Newsoverview.module.css';
+import NewsCard from './NewsCard';
+import { useNews, useAuth } from '../hooks/useApi';
+import { apiService } from '../api';
 
 interface NewsoverviewProps {
   showCenterContent?: boolean;

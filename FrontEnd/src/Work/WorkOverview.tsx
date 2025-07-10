@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import styles from './Css/WorkOverview.module.css';
 import JobDitles from './JobDitles';
+import { useJobs, useAuth } from '../hooks/useApi';
+import { apiService } from '../api';
 
 interface JobApplication {
   id: number;

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Css/ComunityOverview.module.css';
 import ComunityCard from './ComunityCard';
+import { useCommunities, useAuth } from '../hooks/useApi';
+import { apiService } from '../api';
 
 interface ComunityOverviewProps {
   category?: {
