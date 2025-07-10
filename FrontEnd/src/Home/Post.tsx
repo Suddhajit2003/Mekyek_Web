@@ -26,6 +26,7 @@ import {
   FaSmile,
   FaInfo
 } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 // Define proper post type
 interface PostType {
@@ -212,6 +213,41 @@ const peopleYouMayKnow = [
   }
 ];
 
+const mockFriends = [
+  { name: 'Emily Rodriguez', title: 'Marketing Director at TechCorp' },
+  { name: 'David Kim', title: 'Product Manager at StartupX' },
+  { name: 'Lisa Chen', title: 'Data Scientist at AnalyticsPro' },
+  { name: 'Sarah Johnson', title: 'Senior UX Designer at Google' },
+  { name: 'Michael Chen', title: 'Engineering Manager at Tesla' },
+];
+const mockFollowing = [
+  { name: 'Alex Morgan', title: 'Senior UX Designer at TechGrowth Inc.' },
+  { name: 'Jane Smith', title: 'UI Engineer at Facebook' },
+  { name: 'John Doe', title: 'Full Stack Dev at Amazon' },
+];
+
+function ListPopup({ open, onClose, title, list }) {
+  if (!open) return null;
+  return (
+    <div className={styles.popupOverlay}>
+      <div className={styles.popupCard}>
+        <div className={styles.popupHeader}>
+          <span>{title}</span>
+          <button className={styles.popupClose} onClick={onClose}>×</button>
+        </div>
+        <div className={styles.popupList}>
+          {list.map((item, i) => (
+            <div className={styles.popupListItem} key={i}>
+              <div className={styles.popupListName}>{item.name}</div>
+              <div className={styles.popupListTitle}>{item.title}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const Post: React.FC<PostProps> = ({ onPostCreated }) => {
   console.log('Post component rendering...');
   
@@ -229,6 +265,7 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
   const [showRepostModal, setShowRepostModal] = useState<string | null>(null);
   const [repostComment, setRepostComment] = useState('');
   const [showAnalyticsPopup, setShowAnalyticsPopup] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   console.log('Post component state:', { posts: posts.length, user, loading, error });
 
@@ -435,10 +472,12 @@ const Post: React.FC<PostProps> = ({ onPostCreated }) => {
 
         {/* Quick Access Card */}
         <div className={styles.quickAccessCard}>
-          <div className={styles.quickAccessItem}><FaUsers /> Your community</div>
-          <div className={styles.quickAccessItem}><FaCalendarAlt /> Event</div>
+          <div className={styles.quickAccessItem} onClick={() => navigate('/community')}><FaUsers /> Your community</div>
+          <div className={styles.quickAccessItem} onClick={() => navigate('/events')}><FaCalendarAlt /> Event</div>
           <div className={styles.quickAccessItem}><FaFileAlt /> Your Courses</div>
-                      </div>
+          <div className={styles.quickAccessItem} onClick={() => navigate('/friends')}><FaUserFriends /> Your Friend</div>
+          <div className={styles.quickAccessItem} onClick={() => navigate('/following')}><FaHeart /> Following</div>
+        </div>
                       </div>
 
       {/* Main Content */}

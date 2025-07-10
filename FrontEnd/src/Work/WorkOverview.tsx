@@ -71,7 +71,9 @@ const WorkOverview: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showJobDetails, setShowJobDetails] = useState<boolean>(false);
   const [selectedJobId, setSelectedJobId] = useState<number | null>(null);
+  const [activeMode, setActiveMode] = useState<string>('Job');
 
+  // Mock data for different modes
   const allJobs: JobApplication[] = [
     {
       id: 1,
@@ -117,53 +119,171 @@ const WorkOverview: React.FC = () => {
       description: "Join our creative team as a UX/UI Designer to create intuitive and engaging user experiences. You will collaborate with product managers and developers to design user-centered solutions. Work on exciting projects that impact millions of users.",
       requirements: ["Figma", "Adobe Creative Suite", "User Research", "Prototyping", "2+ years experience"],
       benefits: ["Creative Environment", "Design Tools Budget", "Conference Attendance", "Health Insurance", "Flexible Schedule"]
-    },
-    {
-      id: 4,
-      title: "Full Stack Developer",
-      company: "StartupXYZ",
-      location: "Remote",
-      type: "Full-time",
-      level: "Mid Level",
-      salary: "$95,000 - $120,000",
-      industry: "Technology",
-      datePosted: "2024-01-12",
-      isRemote: true,
-      description: "Join our fast-growing startup as a Full Stack Developer. You'll work on both frontend and backend development, contributing to our core product features. Great opportunity to work with modern technologies and make a significant impact.",
-      requirements: ["Node.js", "React", "MongoDB", "AWS", "3+ years experience"],
-      benefits: ["Equity", "Remote Work", "Flexible Hours", "Health Insurance", "Professional Growth"]
-    },
-    {
-      id: 5,
-      title: "Data Scientist",
-      company: "DataCorp",
-      location: "New York, NY",
-      type: "Full-time",
-      level: "Senior Level",
-      salary: "$130,000 - $160,000",
-      industry: "Data Science",
-      datePosted: "2024-01-11",
-      isRemote: false,
-      description: "We're looking for a Data Scientist to join our analytics team. You'll work on machine learning models, data analysis, and insights generation. Collaborate with business stakeholders to solve complex problems using data.",
-      requirements: ["Python", "Machine Learning", "SQL", "Statistics", "4+ years experience"],
-      benefits: ["Bonus", "Health Insurance", "401k", "Training Budget", "Flexible Schedule"]
-    },
-    {
-      id: 6,
-      title: "DevOps Engineer",
-      company: "CloudTech",
-      location: "Seattle, WA",
-      type: "Contract",
-      level: "Senior Level",
-      salary: "$110,000 - $140,000",
-      industry: "Technology",
-      datePosted: "2024-01-10",
-      isRemote: true,
-      description: "Seeking a DevOps Engineer to help scale our cloud infrastructure. You'll work with containerization, CI/CD pipelines, and cloud platforms. Perfect for someone who loves automation and infrastructure challenges.",
-      requirements: ["Docker", "Kubernetes", "AWS", "CI/CD", "Linux", "5+ years experience"],
-      benefits: ["Remote Work", "Flexible Hours", "Health Insurance", "Equipment Allowance", "Professional Development"]
     }
   ];
+
+  const allInternships: JobApplication[] = [
+    {
+      id: 101,
+      title: "Software Engineering Intern",
+      company: "Google",
+      location: "Mountain View, CA",
+      type: "Internship",
+      level: "Entry Level",
+      salary: "$8,000 - $10,000/month",
+      industry: "Technology",
+      datePosted: "2024-01-15",
+      isRemote: false,
+      description: "Join Google as a Software Engineering Intern and work on real projects that impact millions of users worldwide. Learn from experienced engineers and contribute to cutting-edge technology solutions.",
+      requirements: ["Computer Science major", "Python/Java", "GPA 3.5+", "Problem solving", "Team collaboration"],
+      benefits: ["Competitive salary", "Housing allowance", "Free meals", "Mentorship", "Career development"]
+    },
+    {
+      id: 102,
+      title: "UX Design Intern",
+      company: "Apple",
+      location: "Cupertino, CA",
+      type: "Internship",
+      level: "Entry Level",
+      salary: "$7,500 - $9,000/month",
+      industry: "Design",
+      datePosted: "2024-01-14",
+      isRemote: false,
+      description: "Work alongside Apple's world-class design team to create beautiful, intuitive user experiences. Contribute to products used by millions of people around the world.",
+      requirements: ["Design portfolio", "Figma/Sketch", "User research", "Prototyping", "Creative thinking"],
+      benefits: ["Design tools provided", "Creative environment", "Mentorship", "Networking", "Potential full-time offer"]
+    },
+    {
+      id: 103,
+      title: "Data Science Intern",
+      company: "Microsoft",
+      location: "Redmond, WA",
+      type: "Internship",
+      level: "Entry Level",
+      salary: "$8,500 - $10,500/month",
+      industry: "Data Science",
+      datePosted: "2024-01-13",
+      isRemote: true,
+      description: "Join Microsoft's data science team to work on machine learning projects and data analysis. Gain hands-on experience with big data technologies and AI/ML algorithms.",
+      requirements: ["Statistics/ML coursework", "Python/R", "SQL", "Analytical thinking", "Strong GPA"],
+      benefits: ["Remote work option", "Learning resources", "Mentorship", "Competitive pay", "Career growth"]
+    }
+  ];
+
+  const allProjects: JobApplication[] = [
+    {
+      id: 201,
+      title: "E-commerce Platform Development",
+      company: "Freelance Project",
+      location: "Remote",
+      type: "Project",
+      level: "Mid Level",
+      salary: "$5,000 - $8,000",
+      industry: "Technology",
+      datePosted: "2024-01-15",
+      isRemote: true,
+      description: "Develop a complete e-commerce platform with modern technologies. Build user authentication, product catalog, shopping cart, payment integration, and admin dashboard.",
+      requirements: ["React/Node.js", "MongoDB/PostgreSQL", "Payment APIs", "3+ years experience", "Portfolio"],
+      benefits: ["Flexible timeline", "Remote work", "Creative freedom", "Portfolio piece", "Direct client contact"]
+    },
+    {
+      id: 202,
+      title: "Mobile App Design & Development",
+      company: "Startup Project",
+      location: "Remote",
+      type: "Project",
+      level: "Senior Level",
+      salary: "$10,000 - $15,000",
+      industry: "Design",
+      datePosted: "2024-01-14",
+      isRemote: true,
+      description: "Design and develop a mobile app from concept to launch. Work on UI/UX design, frontend development, and backend integration. Lead the entire project lifecycle.",
+      requirements: ["React Native/Flutter", "UI/UX design", "API integration", "5+ years experience", "Project management"],
+      benefits: ["Equity potential", "Creative control", "Portfolio showcase", "Remote work", "Startup experience"]
+    },
+    {
+      id: 203,
+      title: "AI Chatbot Development",
+      company: "Tech Consulting",
+      location: "Remote",
+      type: "Project",
+      level: "Mid Level",
+      salary: "$6,000 - $9,000",
+      industry: "Data Science",
+      datePosted: "2024-01-13",
+      isRemote: true,
+      description: "Build an intelligent chatbot using natural language processing and machine learning. Integrate with existing systems and provide customer support automation.",
+      requirements: ["Python", "NLP/ML", "API development", "2+ years experience", "Problem solving"],
+      benefits: ["AI/ML experience", "Remote work", "Learning opportunity", "Portfolio project", "Competitive pay"]
+    }
+  ];
+
+  // Get current data based on active mode
+  const getCurrentData = () => {
+    switch (activeMode) {
+      case 'Job':
+        return allJobs;
+      case 'Internship':
+        return allInternships;
+      case 'Project':
+        return allProjects;
+      default:
+        return allJobs;
+    }
+  };
+
+  // Get filter options based on active mode
+  const getTypeOptions = () => {
+    switch (activeMode) {
+      case 'Job':
+        return ['All Types', 'Full-time', 'Part-time', 'Contract'];
+      case 'Internship':
+        return ['All Types', 'Summer Internship', 'Fall Internship', 'Spring Internship', 'Year-round'];
+      case 'Project':
+        return ['All Types', 'Web Development', 'Mobile App', 'AI/ML', 'Design', 'Consulting'];
+      default:
+        return ['All Types'];
+    }
+  };
+
+  const getLevelOptions = () => {
+    switch (activeMode) {
+      case 'Job':
+        return ['All Levels', 'Entry Level', 'Mid Level', 'Senior Level', 'Executive'];
+      case 'Internship':
+        return ['All Levels', 'Undergraduate', 'Graduate', 'PhD'];
+      case 'Project':
+        return ['All Levels', 'Beginner', 'Intermediate', 'Advanced', 'Expert'];
+      default:
+        return ['All Levels'];
+    }
+  };
+
+  const getIndustryOptions = () => {
+    switch (activeMode) {
+      case 'Job':
+        return ['All Industries', 'Technology', 'Design', 'Data Science', 'Marketing', 'Finance'];
+      case 'Internship':
+        return ['All Industries', 'Technology', 'Design', 'Data Science', 'Business', 'Engineering'];
+      case 'Project':
+        return ['All Industries', 'Technology', 'Design', 'AI/ML', 'E-commerce', 'Healthcare'];
+      default:
+        return ['All Industries'];
+    }
+  };
+
+  const getFilterOptions = () => {
+    switch (activeMode) {
+      case 'Job':
+        return ['All Jobs', 'Saved Jobs', 'Applied Jobs'];
+      case 'Internship':
+        return ['All Internships', 'Saved Internships', 'Applied Internships'];
+      case 'Project':
+        return ['All Projects', 'Saved Projects', 'Applied Projects'];
+      default:
+        return ['All Jobs', 'Saved Jobs', 'Applied Jobs'];
+    }
+  };
 
   const recommendedJobs: RecommendedJob[] = [
     {
@@ -231,7 +351,7 @@ const WorkOverview: React.FC = () => {
 
   // Filter jobs based on current filters and search
   const filteredJobs = useMemo(() => {
-    return allJobs.filter(job => {
+    return getCurrentData().filter(job => {
       const matchesSearch = !searchQuery || 
         job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -251,7 +371,7 @@ const WorkOverview: React.FC = () => {
 
       return matchesSearch && matchesLocation && matchesType && matchesLevel && matchesIndustry && matchesJobFilter;
     });
-  }, [searchQuery, locationQuery, selectedType, selectedLevel, selectedIndustry, activeJobFilter, savedJobs, appliedJobs, allJobs]);
+  }, [searchQuery, locationQuery, selectedType, selectedLevel, selectedIndustry, activeJobFilter, savedJobs, appliedJobs, getCurrentData]);
 
   // Update job stats when jobs change
   useEffect(() => {
@@ -399,6 +519,15 @@ const WorkOverview: React.FC = () => {
     return `Posted ${Math.ceil(diffDays / 30)} months ago`;
   };
 
+  const handleModeChange = (mode: string) => {
+    setActiveMode(mode);
+    // Reset filters when changing modes
+    setSelectedType('All Types');
+    setSelectedLevel('All Levels');
+    setSelectedIndustry('All Industries');
+    setActiveJobFilter(getFilterOptions()[0]);
+  };
+
   return (
     <div className={styles.workContainer}>
       {/* Success Message */}
@@ -446,68 +575,77 @@ const WorkOverview: React.FC = () => {
 
       {/* Selection Filters */}
       <div className={styles.selectionSection}>
-        <select 
-          className={`${styles.filterCategory} ${styles.filterCategory1}`}
-          value={selectedType}
-          onChange={(e) => setSelectedType(e.target.value)}
-        >
-          <option value="All Types">All Types</option>
-          <option value="Full-time">Full-time</option>
-          <option value="Part-time">Part-time</option>
-          <option value="Contract">Contract</option>
-          <option value="Internship">Internship</option>
-        </select>
+        <div className={styles.filterGroup}>
+          <select 
+            className={`${styles.filterCategory} ${styles.filterCategory1}`}
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+          >
+            {getTypeOptions().map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
 
-        <select 
-          className={`${styles.filterCategory} ${styles.filterCategory2}`}
-          value={selectedLevel}
-          onChange={(e) => setSelectedLevel(e.target.value)}
-        >
-          <option value="All Levels">All Levels</option>
-          <option value="Entry Level">Entry Level</option>
-          <option value="Mid Level">Mid Level</option>
-          <option value="Senior Level">Senior Level</option>
-          <option value="Executive">Executive</option>
-        </select>
+          <select 
+            className={`${styles.filterCategory} ${styles.filterCategory2}`}
+            value={selectedLevel}
+            onChange={(e) => setSelectedLevel(e.target.value)}
+          >
+            {getLevelOptions().map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
 
-        <select 
-          className={`${styles.filterCategory} ${styles.filterCategory3}`}
-          value={selectedIndustry}
-          onChange={(e) => setSelectedIndustry(e.target.value)}
-        >
-          <option value="All Industries">All Industries</option>
-          <option value="Technology">Technology</option>
-          <option value="Design">Design</option>
-          <option value="Data Science">Data Science</option>
-          <option value="Marketing">Marketing</option>
-          <option value="Finance">Finance</option>
-        </select>
+          <select 
+            className={`${styles.filterCategory} ${styles.filterCategory3}`}
+            value={selectedIndustry}
+            onChange={(e) => setSelectedIndustry(e.target.value)}
+          >
+            {getIndustryOptions().map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
 
-        <div className={`${styles.filterCategory} ${styles.filterCategory4}`}>
-          <input
-            type="text"
-            className={styles.locationInput}
-            placeholder="Search location..."
-            value={locationQuery}
-            onChange={(e) => setLocationQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
+          <div className={`${styles.filterCategory} ${styles.filterCategory4}`}>
+            <input
+              type="text"
+              className={styles.locationInput}
+              placeholder="Search location..."
+              value={locationQuery}
+              onChange={(e) => setLocationQuery(e.target.value)}
+              onKeyPress={handleKeyPress}
+            />
+          </div>
+        </div>
+
+        {/* Mode Switcher */}
+        <div className={styles.modeSwitcher}>
+          {['Job', 'Internship', 'Project'].map(mode => (
+            <button 
+              key={mode}
+              className={`${styles.modeButton} ${activeMode === mode ? styles.activeMode : ''}`}
+              onClick={() => handleModeChange(mode)}
+            >
+              {mode}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Featured Jobs Title */}
       <div className={styles.featuredHeader}>
         <h2 className={styles.featuredTitle}>
-          {activeJobFilter === 'All Jobs' ? 'Featured Jobs' : activeJobFilter}
+          {activeMode === 'Job' ? 'Featured Jobs' : 
+           activeMode === 'Internship' ? 'Featured Internships' : 'Featured Projects'}
         </h2>
         <span className={styles.jobCount}>
-          {filteredJobs.length} {filteredJobs.length === 1 ? 'job' : 'jobs'} found
+          {filteredJobs.length} {filteredJobs.length === 1 ? 'item' : 'items'} found
         </span>
       </div>
 
       {/* Job Filter Tabs */}
       <div className={styles.jobFilterTabs}>
-        {['All Jobs', 'Saved Jobs', 'Applied Jobs'].map(filter => (
+        {getFilterOptions().map(filter => (
           <button 
             key={filter}
             className={`${styles.jobFilterTab} ${activeJobFilter === filter ? styles.active : ''}`}
@@ -515,8 +653,8 @@ const WorkOverview: React.FC = () => {
           >
             <span className={`${styles.jobFilterTabText} ${activeJobFilter === filter ? styles.active : styles.inactive}`}>
               {filter}
-              {filter === 'Saved Jobs' && savedJobs.size > 0 && ` (${savedJobs.size})`}
-              {filter === 'Applied Jobs' && appliedJobs.size > 0 && ` (${appliedJobs.size})`}
+              {filter.includes('Saved') && savedJobs.size > 0 && ` (${savedJobs.size})`}
+              {filter.includes('Applied') && appliedJobs.size > 0 && ` (${appliedJobs.size})`}
             </span>
           </button>
         ))}

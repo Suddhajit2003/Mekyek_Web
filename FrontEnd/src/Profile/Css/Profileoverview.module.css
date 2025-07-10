@@ -1,701 +1,864 @@
-/* Profile Container */
-.profile {
+/* Layout grid */
+.profileGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 16px 60px 16px;
+  background: #ffffff;
+}
+
+/* Header Card */
+.headerCard {
+  grid-column: 1 / span 2;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  overflow: hidden;
+  margin-bottom: 32px;
   position: relative;
+}
+.headerBg {
   width: 100%;
-  min-height: 100vh;
-  background: #F4F4F4;
-  padding-top: 70px; /* Space for fixed navbar */
+  height: 180px;
+  background: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80') center/cover no-repeat;
 }
-
-/* Background Image Container */
-.bgImageContainer {
-  position: absolute;
-  height: 345px;
-  left: 64px;
-  right: 64px;
-  top: 90px;
-  background: #FFFFFF;
-}
-
-/* Background Image */
-.bgImage {
-  position: absolute;
-  height: 345px;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  background: linear-gradient(94.09deg, rgba(0, 0, 0, 0.8352) 22.01%, rgba(0, 0, 0, 0.48) 49.75%, rgba(0, 0, 0, 0.8544) 99.51%), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80');
-  background-size: cover;
-  background-position: center;
-}
-
-/* Profile Picture */
-.pfp {
-  position: absolute;
-  width: 222px;
-  height: 222px;
-  left: 89px;
-  top: 314px;
-  background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
-  background-size: cover;
-  background-position: center;
-  border: 9px solid #FFFFFF;
-  border-radius: 120px;
-}
-
-/* Name */
-.name {
-  position: absolute;
-  width: 297px;
-  height: 64px;
-  left: 89px;
-  top: 544px;
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 48px;
-  line-height: 64px;
-  letter-spacing: 0.01em;
-  color: #1E1E1E;
-}
-
-/* Job Title */
-.jobTitle {
-  position: absolute;
-  width: 322px;
-  height: 24px;
-  left: 89px;
-  top: 614px;
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: 0.01em;
-  color: #777777;
-}
-
-/* Location Container */
-.locationContainer {
+.headerContent {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 6px;
-  position: absolute;
-  width: 140px;
-  height: 20px;
-  left: 89px;
-  top: 644px;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 32px 32px 32px;
+  position: relative;
+  gap: 32px;
+  background: none;
 }
-
-.locationIcon {
-  width: 12px;
-  height: 17px;
-  background: #1E1E1E;
+.headerLeft {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
 }
-
-.locationText {
-  width: 122px;
-  height: 20px;
-  font-family: 'Segoe UI';
-  font-style: normal;
+.pfp {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid #fff;
+  background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80') center/cover no-repeat;
+  margin-bottom: -30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e1e1e;
+  margin-bottom: 4px;
+}
+.jobTitle {
+  font-size: 1.1rem;
   font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: 0.01em;
-  color: #1E1E1E;
+  color: #777;
+  margin-bottom: 8px;
 }
-
-/* Connections and Followers */
+.locationRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  color: #1e1e1e;
+  margin-bottom: 8px;
+}
+.locationIcon {
+  font-size: 1.1rem;
+}
 .connectionsFollowers {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 38px;
-  position: absolute;
-  width: 247px;
-  height: 20px;
-  left: 89px;
-  top: 680px;
-}
-
-.connections, .followers {
-  font-family: 'Segoe UI';
-  font-style: normal;
+  gap: 24px;
+  font-size: 1rem;
+  color: #00296b;
   font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-  color: #00296B;
 }
-
-.connections {
-  width: 111px;
-  height: 20px;
+.connections, .followers {
+  color: #00296b;
 }
-
-.followers {
-  width: 98px;
-  height: 20px;
+.headerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
 }
-
-/* Edit Profile Button */
 .editProfileBtn {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  padding: 22px 16px;
-  position: absolute;
-  width: 205px;
-  height: 75.21px;
-  right: 64px;
-  top: 451px;
-  background: #00296B;
-  border-radius: 9px;
-  border: none;
-  cursor: pointer;
-}
-
-.editProfileIcon {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 2px;
   gap: 10px;
-  width: 31.29px;
-  height: 31.21px;
-}
-
-.editProfileText {
-  width: 141.71px;
-  height: 29px;
-  font-family: 'Segoe UI';
-  font-style: normal;
+  background: #00296b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
   font-weight: 600;
-  font-size: 22px;
-  line-height: 29px;
-  text-align: center;
-  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.2s;
 }
-
-/* Profile Completion */
-.profileCompletion {
+.editProfileBtn:hover {
+  background: #003f88;
+}
+.editProfileIcon {
+  font-size: 1.3rem;
+}
+.profileCompletionWrap {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 0px;
-  gap: 5px;
-  position: absolute;
-  width: 199px;
-  height: 134px;
-  right: 64px;
-  top: 556px;
+  align-items: center;
+  gap: 4px;
 }
-
-.progressBar {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-.progressCircle {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  right: 0px;
-  top: 0px;
-  background: #00A840;
-  border-radius: 50px;
-}
-
-.progressBg {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  right: 0px;
-  top: 0px;
-  background: rgba(110, 110, 110, 0.19);
-  border-radius: 50px;
-}
-
-.progressText {
-  position: absolute;
-  width: 44px;
-  height: 29px;
-  right: 28px;
-  top: 35px;
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 29px;
-  letter-spacing: 0.01em;
-  color: #0DAC4A;
-}
-
-.completionText {
-  width: 199px;
-  height: 29px;
-  font-family: 'Segoe UI';
-  font-style: normal;
+.profileCompletionCircle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #eafaf1;
+  border: 4px solid #28a745;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
   font-weight: 700;
-  font-size: 22px;
-  line-height: 29px;
-  letter-spacing: 0.01em;
-  color: #159D49;
+  color: #28a745;
+}
+.profileCompletionText {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.completionText {
+  font-size: 0.95rem;
+  color: #28a745;
+  font-weight: 600;
+  text-align: center;
 }
 
-/* Section Styles */
-.section {
-  background: #FFFFFF;
-  box-shadow: 5px 9px 11px rgba(0, 0, 0, 0.05);
-  border-radius: 22px;
-}
-
-/* About Section */
-.aboutSection {
+/* Main and Sidebar Columns */
+.mainCol {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 22px 8px;
-  gap: 12px;
-  position: absolute;
-  height: 209px;
-  left: 64px;
-  right: 728px;
-  top: 724px;
+  gap: 32px;
 }
-
-/* Languages Section */
-.languagesSection {
+.sidebarCol {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 22px 8px;
-  gap: 12px;
-  position: absolute;
-  height: 209px;
-  left: 728px;
-  right: 64px;
-  top: 724px;
+  gap: 32px;
 }
 
-/* Education Section */
-.educationSection {
+/* Card Styles */
+.card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 28px 28px 20px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 22px 16px;
-  gap: 16px;
-  position: absolute;
-  height: 514px;
-  left: 64px;
-  right: 728px;
-  top: 949px;
+  gap: 18px;
+  transition: box-shadow 0.18s, transform 0.18s;
 }
-
-/* Experience Section */
-.experienceSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 22px 16px;
-  gap: 16px;
-  position: absolute;
-  height: 864px;
-  left: 64px;
-  right: 728px;
-  top: 1479px;
+.card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.13);
+  transform: translateY(-2px) scale(1.01);
 }
-
-/* Contact Section */
-.contactSection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 22px 8px;
-  gap: 12px;
-  position: absolute;
-  height: 209px;
-  left: 728px;
-  right: 64px;
-  top: 958px;
-}
-
-/* Skills Section */
-.skillsSection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 22px 8px;
-  gap: 12px;
-  position: absolute;
-  height: 209px;
-  left: 728px;
-  right: 64px;
-  top: 1183px;
-}
-
-/* People You May Know Section */
-.peopleSection {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 0.4px;
-  position: absolute;
-  height: 282.4px;
-  left: 728px;
-  right: 64px;
-  top: 1408px;
-  background: #6E6E6E;
-  box-shadow: 5px 9px 11px rgba(0, 0, 0, 0.05);
-  border-radius: 22px;
-}
-
-/* Section Headers */
 .sectionHeader {
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 0px 12px;
-  gap: 482px;
-  width: 632px;
-  height: 29px;
+  margin-bottom: 8px;
 }
-
 .sectionTitle {
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 29px;
-  color: #00296B;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #00296b;
 }
-
-.sectionContent {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-  width: 632px;
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  letter-spacing: 0.01em;
-  color: #000000;
-}
-
-/* Add Button */
-.addBtn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 9px 0px;
-  gap: 5px;
-  width: 167px;
-  height: 39px;
-  background: #00296B;
-  border-radius: 9px;
-  border: none;
+.editIcon {
+  font-size: 1.1rem;
+  color: #888;
   cursor: pointer;
-  font-family: 'Segoe UI';
-  font-style: normal;
+}
+.addBtn {
+  background: #eaf6ff;
+  color: #0077b5;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  font-size: 0.98rem;
   font-weight: 600;
-  font-size: 16px;
-  line-height: 21px;
-  text-align: center;
-  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.addBtn:hover {
+  background: #d0eaff;
+}
+.sectionContent {
+  font-size: 1rem;
+  color: #222;
+  line-height: 1.6;
 }
 
-/* Education/Experience Items */
-.educationItem, .experienceItem {
+/* Education & Experience List */
+.eduExpList {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding: 0px;
-  gap: 8px;
-  width: 616px;
+  gap: 24px;
 }
-
-.itemHeader {
+.eduExpItem {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 8px;
-  gap: 264px;
-  width: 616px;
-  height: 89px;
+  gap: 18px;
+  align-items: flex-start;
 }
-
-.itemInfo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0px;
-  gap: 11px;
-  width: 595px;
-  height: 89px;
-}
-
 .itemLogo {
-  width: 89px;
-  height: 89px;
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  background: #eee;
   background-size: cover;
   background-position: center;
-  border-radius: 44.5px;
+  flex-shrink: 0;
 }
-
-.itemDetails {
+.itemBody {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 6px;
-  width: 221px;
-  height: 85px;
+  gap: 2px;
 }
-
-.itemTitle {
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 29px;
-  color: #003F88;
-}
-
-.itemSubtitle {
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  color: #6E6E6E;
-}
-
-.itemDate {
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 20px;
-  color: #6E6E6E;
-}
-
-.itemDescription {
+.itemHeaderRow {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  padding: 10px 0px 10px 109px;
-  gap: 10px;
-  width: 616px;
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 32px;
-  color: #000000;
+  justify-content: space-between;
+  gap: 8px;
+}
+.itemTitle {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #1e1e1e;
+}
+.menuIcon {
+  font-size: 1.2rem;
+  color: #bbb;
+  cursor: pointer;
+}
+.itemSubtitle {
+  font-size: 1rem;
+  color: #0077b5;
+  font-weight: 600;
+}
+.itemDate {
+  font-size: 0.97rem;
+  color: #888;
+  margin-bottom: 2px;
+}
+.itemDescription {
+  font-size: 0.98rem;
+  color: #444;
+  margin-top: 2px;
 }
 
 /* Skills */
 .skillsContainer {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
-  align-content: flex-start;
-  padding: 0px;
-  gap: 22px 20px;
-  width: 632px;
-  height: 102px;
+  gap: 10px;
 }
-
 .skillTag {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-  height: 40px;
-  background: #00296B;
-  border-radius: 32px;
-  font-family: 'Segoe UI';
-  font-style: normal;
+  background: #eaf6ff;
+  color: #0077b5;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.98rem;
   font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-  color: #FFFFFF;
 }
-
 .addSkillTag {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
-  width: 91px;
-  height: 40px;
-  background: rgba(207, 207, 207, 0.31);
-  border-radius: 32px;
-  font-family: 'Segoe UI';
-  font-style: normal;
+  background: #f4f4f4;
+  color: #888;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.98rem;
   font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-  text-align: center;
-  color: #1E1E1E;
   cursor: pointer;
 }
 
 /* People You May Know */
-.peopleContent {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 12px 16px;
-  gap: 16px;
-  width: 648px;
-  height: 246px;
-  background: #FFFFFF;
-}
-
 .peopleList {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 16px;
-  width: 616px;
-  height: 182px;
+  gap: 18px;
 }
-
 .personItem {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 0px;
-  gap: 58px;
-  width: 616px;
-  height: 50px;
+  justify-content: space-between;
+  gap: 12px;
 }
-
 .personInfo {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  padding: 0px;
-  gap: 9px;
-  width: 530px;
-  height: 50px;
+  gap: 12px;
 }
-
 .personPfp {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #eee;
   background-size: cover;
   background-position: center;
-  border-radius: 32px;
 }
-
 .personDetails {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 6px;
-  width: 208px;
-  height: 50px;
 }
-
 .personName {
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  color: #00296B;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1e1e1e;
 }
-
 .personTitle {
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 20px;
-  color: #6E6E6E;
+  font-size: 0.97rem;
+  color: #777;
 }
-
 .followBtn {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 6px 16px;
-  gap: 10px;
-  width: 86px;
-  height: 36px;
-  border: 1px solid #00296B;
-  border-radius: 9px;
-  background: transparent;
-  cursor: pointer;
-  font-family: 'Segoe UI';
-  font-style: normal;
+  background: #fff;
+  color: #0077b5;
+  border: 1.5px solid #0077b5;
+  border-radius: 6px;
+  padding: 6px 18px;
+  font-size: 0.98rem;
   font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  color: #00296B;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
 }
-
+.followBtn:hover {
+  background: #0077b5;
+  color: #fff;
+}
 .viewMore {
+  margin-top: 10px;
+  text-align: right;
+  color: #0077b5;
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
-  padding: 8px 0px;
-  gap: 10px;
-  width: 648px;
-  height: 36px;
-  background: #FFFFFF;
-  font-family: 'Segoe UI';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 20px;
-  text-align: center;
-  color: #003F88;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.editModal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e1e5e9;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.modalClose:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.modalContent {
+  padding: 32px;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 24px 32px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.modalCancel {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modalCancel:hover {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.modalSave {
+  background: #0077b5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modalSave:hover {
+  background: #005fa3;
+  transform: translateY(-1px);
+}
+
+/* Image Upload Styles */
+.imageSection {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.imageUploadGroup {
+  margin-bottom: 24px;
+}
+
+.imageLabel {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 120px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px dashed #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+}
+
+.imagePreview:hover {
+  border-color: #0077b5;
+  box-shadow: 0 0 0 1px rgba(0, 119, 181, 0.1);
+}
+
+.imageInput {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
 }
 
-/* Edit Icon */
-.editIcon {
-  width: 18px;
-  height: 18px;
-  background: #003F88;
+.imageUploadBtn {
+  background: #0077b5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1;
+  display: inline-block;
+  text-decoration: none;
 }
 
-/* Three Dots Menu */
-.menuIcon {
-  width: 21px;
-  height: 5px;
-  background: #6E6E6E;
-  transform: rotate(-90deg);
+.imageUploadBtn:hover {
+  background: #005fa3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 119, 181, 0.2);
+}
+
+.profileImagePreview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profileImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+/* Form Styles */
+.infoSection {
+  margin-top: 32px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.formLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.inlineEditBtn {
+  background: none;
+  border: none;
+  color: #0077b5;
+  font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  position: relative;
+}
+
+.inlineEditBtn:hover {
+  background: #f0f9ff;
+  color: #005fa3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 119, 181, 0.15);
+}
+
+.inlineEditBtn::before {
+  content: "✏️";
+  font-size: 0.9rem;
+  margin-right: 2px;
+}
+
+.displayValue {
+  padding: 12px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1f2937;
+  background: #f9fafb;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.displayValue:hover {
+  border-color: #0077b5;
+  background: #f0f9ff;
+  box-shadow: 0 0 0 1px rgba(0, 119, 181, 0.1);
+}
+
+.displayValue::after {
+  content: "Click ✏️ Edit to modify";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: #6b7280;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.displayValue:hover::after {
+  opacity: 1;
+}
+
+.inlineEditContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inlineEditActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.inlineSaveBtn {
+  background: #0077b5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inlineSaveBtn:hover {
+  background: #005fa3;
+  transform: translateY(-1px);
+}
+
+.inlineCancelBtn {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.inlineCancelBtn:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.formInput {
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #1f2937;
+  background: #fff;
+  transition: all 0.2s ease;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: #0077b5;
+  box-shadow: 0 0 0 3px rgba(0, 119, 181, 0.1);
+}
+
+.formInput::placeholder {
+  color: #9ca3af;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Remove Skill Button */
+.removeSkill {
+  margin-left: 8px;
+  color: #dc3545;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: color 0.15s;
+}
+.removeSkill:hover {
+  color: #a71d2a;
+}
+
+/* Card and Button Transitions */
+.editProfileBtn, .addBtn, .followBtn {
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .profileGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px 4vw 40px 4vw;
+  }
+  .headerCard {
+    margin-bottom: 24px;
+  }
+  .headerContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0 20px 24px 20px;
+  }
+  .headerLeft {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 20px;
+  }
+  .headerRight {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .profileGrid {
+    padding: 8px 0 24px 0;
+  }
+  .headerCard {
+    border-radius: 0;
+  }
+  .headerContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0 8px 16px 8px;
+  }
+  .mainCol, .sidebarCol {
+    gap: 18px;
+  }
+  .card {
+    padding: 16px 8px 12px 8px;
+    border-radius: 8px;
+  }
+  .pfp {
+    width: 80px;
+    height: 80px;
+    border-width: 3px;
+  }
+  .name {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .editModal {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .modalContent {
+    padding: 20px;
+  }
+
+  .modalHeader {
+    padding: 20px;
+  }
+
+  .modalFooter {
+    padding: 20px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .profileImagePreview {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .imagePreview {
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .editModal {
+    width: 100%;
+    margin: 10px;
+    border-radius: 12px;
+  }
+
+  .modalContent {
+    padding: 16px;
+  }
+
+  .modalHeader {
+    padding: 16px;
+  }
+
+  .modalFooter {
+    padding: 16px;
+    flex-direction: column;
+  }
+
+  .modalCancel,
+  .modalSave {
+    width: 100%;
+  }
 }

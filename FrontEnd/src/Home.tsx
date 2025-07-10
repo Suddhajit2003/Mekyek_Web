@@ -1,15 +1,25 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Post from './Home/Post';
+import FriendsPage from './Home/FriendsPage';
+import FollowingPage from './Home/FollowingPage';
+import EventsPage from './Home/EventsPage';
+import CommunityPage from './Home/CommunityPage';
 import styles from './Css/Home.module.css';
 
 const Home: React.FC = () => {
   console.log('Home component rendering...');
-  
   try {
     return (
       <div className={styles.homeContainer}>
         <div className={styles.feedContainer}>
-          <Post />
+          <Routes>
+            <Route path="/" element={<Post />} />
+            <Route path="/friends" element={<FriendsPage />} />
+            <Route path="/following" element={<FollowingPage />} />
+            <Route path="/events" element={<EventsPage />} />
+            <Route path="/community" element={<CommunityPage />} />
+          </Routes>
         </div>
       </div>
     );
