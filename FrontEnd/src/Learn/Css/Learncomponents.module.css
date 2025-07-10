@@ -1,0 +1,1083 @@
+/* Main Container */
+.componentsContainer {
+  position: relative;
+  width: 100%;
+  height: 1350px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #ffffff 40%, #dfdfdf 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  padding-bottom: 40px;
+  /* margin-top: 40px; */
+  z-index: 2;
+}
+
+/* Toast Messages */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #e6e6e6 0%, #102b98 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 1000;
+  animation: slideIn 0.5s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 350px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Featured Courses */
+.featuredCoursesTitle {
+  position: absolute;
+  width: 600px;
+  height: 60px;
+  left: 64px;
+  top: 40px;
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+  letter-spacing: -0.02em;
+  color: #000000;
+  margin: 0;
+  text-shadow: 0 2px 0px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #000000 0%, #F0F8FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* view all */
+.viewAllButton {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  right: 64px;
+  top: 50px;
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
+}
+
+.viewAllButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* course 1 */
+.course1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 0px;
+  position: absolute;
+  height: 680px;
+  left: 64px;
+  right: 949px;
+  top: 140px;
+  background: #FFFFFF;
+  box-shadow: 0px 16px 64px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.course1:hover {
+  transform: translateY(-12px);
+  box-shadow: 0px 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+/* course 2 */
+.course2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 0px;
+  position: absolute;
+  height: 680px;
+  left: 507px;
+  right: 507px;
+  top: 140px;
+  background: #FFFFFF;
+  box-shadow: 0px 16px 64px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.course2:hover {
+  transform: translateY(-12px);
+  box-shadow: 0px 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+/* course 3 */
+.course3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 0px;
+  position: absolute;
+  height: 680px;
+  left: 949px;
+  right: 64px;
+  top: 140px;
+  background: #FFFFFF;
+  box-shadow: 0px 16px 64px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.course3:hover {
+  transform: translateY(-12px);
+  box-shadow: 0px 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+/* Frame 73 - Course 1 */
+.course1 .courseImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 427px;
+  height: 285px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px 22px 0 0;
+}
+
+.course1 .courseImage {
+  width: 427px;
+  height: 285px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 22px 22px 0 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  transition: transform 0.3s ease;
+}
+
+.course1:hover .courseImage {
+  transform: scale(1.05);
+}
+
+/* Frame 72 - Course 1 */
+.course1 .courseContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 20px;
+  gap: 16px;
+  width: 427px;
+  height: 200px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Frame 70 - Course 1 */
+.course1 .courseHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 395px;
+  height: 33px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Frame 69 - Course 1 */
+.course1 .categoryBadge {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  width: 59px;
+  height: 33px;
+  background: linear-gradient(135deg, #AFCBFF 0%, #E8F4FD 100%);
+  border-radius: 16px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border: 1px solid #E0E7FF;
+}
+
+/* Business */
+.course1 .categoryBadge {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 13px;
+  text-align: center;
+  color: #003F88;
+}
+
+/* 6 weeks • Beginner */
+.course1 .courseDuration {
+  width: 175px;
+  height: 20px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: right;
+  color: #6B7280;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Frame 68 - Course 1 */
+.course1 .courseInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 16px;
+  width: 395px;
+  height: auto;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Frame 67 - Course 1 */
+.course1 .courseDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 395px;
+  height: auto;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Introduction to Business Leadership */
+.course1 .courseTitle {
+  width: 395px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #00296B;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+/* Master the fundamentals of effective business leadership in modern organizations */
+.course1 .courseDescription {
+  width: 395px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  color: #6B7280;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Frame 71 - Course 1 */
+.course1 .courseFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  gap: 20px;
+  width: 392px;
+  height: 75px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+  border-top: 1px solid #E5E7EB;
+}
+
+/* Instructor: Dr. Emily Chen */
+.course1 .instructorName {
+  width: 147px;
+  height: 17px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 17px;
+  color: #6B7280;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* cta - Course 1 */
+.course1 .enrollButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  width: 124px;
+  height: 47px;
+  background: linear-gradient(135deg, #00296B 0%, #003F88 100%);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  transition: all 0.3s ease;
+}
+
+.course1 .enrollButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 16px rgba(0, 41, 107, 0.3);
+}
+
+/* Enroll Now */
+.course1 .enrollButton {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 27px;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+/* Frame 73 - Course 2 */
+.course2 .courseImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 426px;
+  height: 285px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px 22px 0 0;
+}
+
+.course2 .courseImage {
+  width: 426px;
+  height: 285px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 22px 22px 0 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  transition: transform 0.3s ease;
+}
+
+.course2:hover .courseImage {
+  transform: scale(1.05);
+}
+
+/* Frame 72 - Course 2 */
+.course2 .courseContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 20px;
+  gap: 16px;
+  width: 426px;
+  height: 200px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Frame 70 - Course 2 */
+.course2 .courseHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 394px;
+  height: 33px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Frame 69 - Course 2 */
+.course2 .categoryBadge {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  width: 72px;
+  height: 33px;
+  background: linear-gradient(135deg, #AFCBFF 0%, #E8F4FD 100%);
+  border-radius: 16px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border: 1px solid #E0E7FF;
+}
+
+/* Technology */
+.course2 .categoryBadge {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 13px;
+  text-align: center;
+  color: #003F88;
+}
+
+/* 8 weeks • Intermediate */
+.course2 .courseDuration {
+  width: 175px;
+  height: 20px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: right;
+  color: #6B7280;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Frame 68 - Course 2 */
+.course2 .courseInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 16px;
+  width: 394px;
+  height: auto;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Frame 67 - Course 2 */
+.course2 .courseDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 394px;
+  height: auto;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Data Science for Managers */
+.course2 .courseTitle {
+  width: 394px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #00296B;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+/* Learn how to make data-driven decisions that impact business growth */
+.course2 .courseDescription {
+  width: 394px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  color: #6B7280;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Frame 71 - Course 2 */
+.course2 .courseFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  gap: 20px;
+  width: 396px;
+  height: 75px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+  border-top: 1px solid #E5E7EB;
+}
+
+/* Instructor: Prof. Michael Johnson */
+.course2 .instructorName {
+  width: 191px;
+  height: 17px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 17px;
+  color: #6B7280;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* cta - Course 2 */
+.course2 .enrollButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  width: 124px;
+  height: 47px;
+  background: linear-gradient(135deg, #00296B 0%, #003F88 100%);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  transition: all 0.3s ease;
+}
+
+.course2 .enrollButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 16px rgba(0, 41, 107, 0.3);
+}
+
+/* Enroll Now */
+.course2 .enrollButton {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 27px;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+/* Frame 73 - Course 3 */
+.course3 .courseImageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 427px;
+  height: 285px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px 22px 0 0;
+}
+
+.course3 .courseImage {
+  width: 427px;
+  height: 285px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 22px 22px 0 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  transition: transform 0.3s ease;
+}
+
+.course3:hover .courseImage {
+  transform: scale(1.05);
+}
+
+/* Frame 72 - Course 3 */
+.course3 .courseContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 20px;
+  gap: 16px;
+  width: 427px;
+  height: 200px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Frame 70 - Course 3 */
+.course3 .courseHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  width: 395px;
+  height: 33px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Frame 69 - Course 3 */
+.course3 .categoryBadge {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 10px;
+  width: 69px;
+  height: 33px;
+  background: linear-gradient(135deg, #AFCBFF 0%, #E8F4FD 100%);
+  border-radius: 16px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border: 1px solid #E0E7FF;
+}
+
+/* Innovation */
+.course3 .categoryBadge {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 13px;
+  text-align: center;
+  color: #003F88;
+}
+
+/* 4 weeks • Advanced */
+.course3 .courseDuration {
+  width: 175px;
+  height: 20px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: right;
+  color: #6B7280;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Frame 68 - Course 3 */
+.course3 .courseInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 16px;
+  width: 395px;
+  height: auto;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Frame 67 - Course 3 */
+.course3 .courseDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 12px;
+  width: 395px;
+  height: auto;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Strategic Innovation */
+.course3 .courseTitle {
+  width: 395px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  color: #00296B;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+/* Develop strategies for fostering innovation within your organization */
+.course3 .courseDescription {
+  width: 395px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  color: #6B7280;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Frame 71 - Course 3 */
+.course3 .courseFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  gap: 20px;
+  width: 397px;
+  height: 75px;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+  border-top: 1px solid #E5E7EB;
+}
+
+/* Instructor: Dr. Sarah Williams */
+.course3 .instructorName {
+  width: 169px;
+  height: 17px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 17px;
+  color: #6B7280;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* cta - Course 3 */
+.course3 .enrollButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  width: 124px;
+  height: 47px;
+  background: linear-gradient(135deg, #00296B 0%, #003F88 100%);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  transition: all 0.3s ease;
+}
+
+.course3 .enrollButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 16px rgba(0, 41, 107, 0.3);
+}
+
+/* Enroll Now */
+.course3 .enrollButton {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 27px;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+/* Newsletter Section */
+.newsletterSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 40px;
+  gap: 40px;
+  position: absolute;
+  width: 1216px;
+  height: 380px;
+  left: 64px;
+  top: 870px;
+  background: linear-gradient(135deg, #0a1f7c 0%, #061667 100%);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.2);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* Frame 75 */
+.newsletterContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+  width: 1136px;
+  height: 140px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Newsletter Title */
+.newsletterTitle {
+  width: 1136px;
+  height: 52px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 52px;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Newsletter Description */
+.newsletterDescription {
+  width: 1136px;
+  height: 60px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.9);
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0;
+}
+
+/* Frame 76 */
+.newsletterForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+  width: 1136px;
+  height: 140px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Email Input */
+.emailInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 10px;
+  width: 1136px;
+  height: 56px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.emailInput:focus-within {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Email Field */
+.emailField {
+  width: 1100px;
+  height: 22px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.emailField::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Continue Button */
+.continueButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 28px;
+  gap: 10px;
+  width: 1187px;
+  height: 56px;
+  background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  transition: all 0.3s ease;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  color: #05186c;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.continueButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+}

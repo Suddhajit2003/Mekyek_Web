@@ -1,0 +1,224 @@
+/* Footer Section */
+.footerSection {
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  min-height: 554px;
+  background: linear-gradient(100.72deg, #003F88 13.6%, #00296B 68.65%);
+  z-index: 10;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 32px;
+  margin-top: 4070px;
+}
+.footerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90vw;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 74px 64px 0 64px;
+  position: relative;
+}
+.footerCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.aboutCol {
+  width: 316px;
+  height: 112px;
+}
+.quickLinksCol {
+  width: 169px;
+  height: 163px;
+}
+.resourcesCol {
+  width: 148px;
+  height: 163px;
+}
+.contactCol {
+  width: 237px;
+  height: 133px;
+}
+.footerTitle {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 43px;
+  letter-spacing: 0.01em;
+  margin-bottom: 2px;
+}
+.footerDesc {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  margin-top: 2px;
+}
+.footerLink {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  margin-top: 2px;
+  cursor: pointer;
+  color: #fff;
+  text-align: left;
+  transition: text-decoration 0.2s;
+}
+.footerLink:hover {
+  text-decoration: underline;
+}
+.footerContact {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  margin-top: 2px;
+  color: #fff;
+}
+.divider {
+  position: absolute;
+  left: 64px;
+  top: 311px;
+  width: calc(100vw - 128px);
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+}
+.footerBottom {
+  position: relative;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100vw;
+  height: 120px;
+  padding-bottom: 32px;
+}
+.copyright {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  color: #fff;
+  margin-right: 48px;
+}
+.policyLinks {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #fff;
+  margin-right: 48px;
+}
+.policyLinks span {
+  cursor: pointer;
+  transition: text-decoration 0.2s;
+}
+.policyLinks span:hover {
+  text-decoration: underline;
+}
+.socialSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  position: absolute;
+  right: 171px;
+  top: 65px;
+}
+.socialLabel {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #fff;
+}
+.socialIcons {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 22px;
+  width: 98px;
+  height: 18px;
+}
+.socialIcon svg {
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .footerContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 48px 24px 0 24px;
+  }
+  .footerCol {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .divider {
+    left: 24px;
+    width: calc(100vw - 48px);
+  }
+  .footerBottom {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding-bottom: 16px;
+  }
+  .socialSection {
+    position: static;
+    margin-top: 24px;
+    align-items: center;
+  }
+}
+@media (max-width: 700px) {
+  .footerSection {
+    height: auto;
+    padding-bottom: 32px;
+  }
+  .footerContent {
+    padding: 32px 8px 0 8px;
+    gap: 16px;
+  }
+  .footerCol {
+    margin-bottom: 8px;
+  }
+  .divider {
+    left: 8px;
+    width: calc(100vw - 16px);
+    top: unset;
+    bottom: 120px;
+  }
+  .footerBottom {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding-bottom: 8px;
+  }
+  .copyright, .policyLinks {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+  .socialSection {
+    position: static;
+    margin-top: 16px;
+    align-items: center;
+  }
+}

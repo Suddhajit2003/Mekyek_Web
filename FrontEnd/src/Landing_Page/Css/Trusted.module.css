@@ -1,0 +1,237 @@
+/* Section Container */
+.trustedSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 32px 0px;
+  gap: 32px;
+  position: absolute;
+  height: 466px;
+  left: 64px;
+  right: 64px;
+  top: 2274px;
+  background: linear-gradient(94.99deg, rgba(232,243,255,0.25) 13.21%, rgba(196,215,255,0.25) 51.25%, rgba(218,235,254,0.1225) 90.77%);
+  border-radius: 24px;
+  z-index: 1;
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  width: 1312px;
+  height: 120px;
+  margin: 0 auto;
+}
+.heading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 64px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #00296B;
+  margin: 0;
+}
+.subheading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0;
+}
+
+.testimonialRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  width: 1312px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+.testimonialCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px 16px;
+  gap: 12px;
+  width: 426.67px;
+  height: 250px;
+  background: #fff;
+  box-shadow: 5px 9px 11px rgba(0,0,0,0.05);
+  border-radius: 22px;
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  animation: fadeInTestimonial 0.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+.testimonialCard:nth-child(1) { animation-delay: 0.1s; }
+.testimonialCard:nth-child(2) { animation-delay: 0.25s; }
+.testimonialCard:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes fadeInTestimonial {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.testimonialHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #eee;
+}
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.userName {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.01em;
+  color: #00296B;
+}
+.userTitle {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #003F88;
+}
+.ratingRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  margin: 8px 0 0 0;
+}
+.star {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quote {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.01em;
+  color: #1E1E1E;
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .headingGroup, .testimonialRow {
+    width: 100vw;
+    max-width: 98vw;
+  }
+  .testimonialCard {
+    width: 30vw;
+    min-width: 220px;
+  }
+}
+@media (max-width: 900px) {
+  .testimonialRow {
+    flex-direction: column;
+    height: auto;
+    gap: 32px;
+  }
+  .testimonialCard {
+    width: 90vw;
+    max-width: 350px;
+  }
+}
+
+/* Companies Section */
+.companiesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 64px;
+  position: absolute;
+  height: 187px;
+  left: 64px;
+  right: 64px;
+  top: 2029px;
+  background: none;
+  z-index: 2;
+}
+.companiesSection .headingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  width: 1312px;
+  height: 187px;
+}
+.companiesSection .heading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 64px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #00296B;
+  margin: 0;
+}
+.companiesSection .subheading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0;
+}
+.subheading2 {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 43px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0;
+}
+.logosRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 76px;
+  width: 1312px;
+  height: 92px;
+  display: none;
+}

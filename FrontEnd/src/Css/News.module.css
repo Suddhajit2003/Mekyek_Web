@@ -1,0 +1,152 @@
+/* Latest News Heading */
+.Latest_News {
+  position: absolute;
+  left: 396px;
+  right: 396px;
+  top: 964px;
+  height: 40px;
+  
+  /* Typography */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  
+  /* Background */
+  background: transparent;
+}
+
+/* Search Results Text */
+.searchResults {
+  font-size: 16px;
+  font-weight: 400;
+  color: #6E6E6E;
+  margin-left: 16px;
+}
+
+/* Loading Overlay */
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(248, 249, 250, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 20px;
+}
+
+.spinnerCircle {
+  width: 100%;
+  height: 100%;
+  border: 4px solid #E5E5E5;
+  border-top: 4px solid #003F88;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingOverlay p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #003F88;
+  margin: 0;
+}
+
+/* No Results Section */
+.noResults {
+  position: absolute;
+  left: 396px;
+  right: 396px;
+  top: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 5px 9px 11px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.noResultsIcon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  opacity: 0.5;
+}
+
+.noResults h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #003F88;
+  margin: 0 0 12px 0;
+}
+
+.noResults p {
+  font-size: 16px;
+  color: #6E6E6E;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+}
+
+.clearSearchButton {
+  background: #003F88;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.clearSearchButton:hover {
+  background: #002F66;
+}
+
+.clearSearchButton:active {
+  transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .Latest_News {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: 100%;
+    margin: 20px 0;
+    padding: 0 20px;
+  }
+}

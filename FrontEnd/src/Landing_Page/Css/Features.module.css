@@ -1,0 +1,302 @@
+/* Section Container */
+.featuresSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0px;
+  gap: 48px;
+  position: absolute;
+  width: 1440px;
+  height: 795px;
+  left: 0px;
+  top: 1200px;
+  background: transparent;
+}
+
+/* Heading Group */
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  width: 1440px;
+  height: 120px;
+}
+.heading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 64px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #00296B;
+  margin: 0;
+}
+.subheading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0;
+}
+
+/* CTA Tabs */
+.ctaTabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 32px;
+  width: 1440px;
+  height: 77px;
+}
+.ctaTab, .ctaTabActive {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 12px;
+  gap: 10px;
+  border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 29px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.ctaTab {
+  background: #E1EAF4;
+  color: rgba(0, 63, 136, 0.5);
+  width: auto;
+  min-width: 150px;
+}
+.ctaTabActive {
+  background: #003F88;
+  color: #fff;
+  width: auto;
+  min-width: 150px;
+}
+
+/* Feature Content Row */
+.featureContentRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px 64px;
+  gap: 24px;
+  width: 1440px;
+  height: 438px;
+}
+
+/* Feature Card */
+.featureCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px;
+  gap: 40px;
+  width: 644px;
+  height: 406px;
+  background: #fff;
+  box-shadow: 5px 9px 11px rgba(0,0,0,0.05);
+  border-radius: 32px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  animation: fadeInCard 0.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+.animatedCard {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+@keyframes fadeInCard {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.featureCardText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 612px;
+}
+.featureTitle {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 43px;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0;
+}
+.featureDesc {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0 0 8px 0;
+}
+.featureBullets {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+}
+.featureBullets li {
+  margin-bottom: 8px;
+}
+.featureCtaBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 12px;
+  gap: 10px;
+  width: 152px;
+  height: 51px;
+  background: #00296B;
+  border-radius: 8px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 16px;
+  margin-left: 170px;
+  transition: background 0.2s;
+}
+.featureCtaBtn:hover {
+  background: #003F88;
+}
+
+/* Feature Image */
+.featureImageWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 644px;
+  height: 406px;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.featureImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+  background: linear-gradient(166.84deg, rgba(0, 0, 0, 0) 17.69%, rgba(0, 0, 0, 0.95) 86.53%);
+}
+
+/* Sliding Animations */
+.slideOutLeft {
+  animation: slideOutLeft 0.4s forwards;
+}
+.slideOutRight {
+  animation: slideOutRight 0.4s forwards;
+}
+.slideInLeft {
+  animation: slideInLeft 0.4s forwards;
+}
+.slideInRight {
+  animation: slideInRight 0.4s forwards;
+}
+
+@keyframes slideOutLeft {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(-80px); }
+}
+@keyframes slideOutRight {
+  0% { opacity: 1; transform: translateX(0); }
+  100% { opacity: 0; transform: translateX(80px); }
+}
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-80px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(80px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsive */
+@media (max-width: 1500px) {
+  .featuresSection, .headingGroup, .ctaTabs, .featureContentRow {
+    width: 100vw;
+    max-width: 98vw;
+  }
+  .featureCard, .featureImageWrap {
+    width: 45vw;
+    min-width: 320px;
+    max-width: 98vw;
+  }
+}
+@media (max-width: 1100px) {
+  .featureContentRow {
+    flex-direction: column;
+    height: auto;
+    gap: 32px;
+  }
+  .featureCard, .featureImageWrap {
+    width: 90vw;
+    max-width: 600px;
+    height: 350px;
+  }
+}
+@media (max-width: 700px) {
+  .featuresSection {
+    padding: 16px 0;
+    height: auto;
+  }
+  .heading {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .subheading {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .ctaTabs {
+    flex-direction: column;
+    gap: 12px;
+    height: auto;
+  }
+  .featureCard, .featureImageWrap {
+    width: 98vw;
+    min-width: 0;
+    height: 250px;
+    padding: 12px 4px;
+  }
+  .featureCardText {
+    width: 90vw;
+  }
+}

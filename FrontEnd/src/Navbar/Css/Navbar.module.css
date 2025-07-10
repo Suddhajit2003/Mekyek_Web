@@ -1,0 +1,159 @@
+/* General navbar container */
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 64px;
+  height: 70px;
+  background: #FFFFFF;
+  backdrop-filter: blur(80px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI';
+}
+
+.leftSection, .rightSection {
+  display: flex;
+  align-items: center;
+  gap: 75px;
+}
+
+/* Left section: logo and nav items */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoImage {
+  width: 31px;
+  height: 31px;
+}
+
+.Mekyek {
+  font-weight: 700;
+  font-size: 36px;
+  color: #00296B;
+}
+
+.navItems {
+  display: flex;
+  gap: 40px;
+}
+
+.navItems a {
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1E1E1E;
+  font-weight: 400;
+}
+
+.navItem {
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1E1E1E;
+  font-weight: 400;
+}
+
+.navItems a.Home {
+  font-weight: 700;
+  color: #00296B;
+}
+
+.Home {
+  font-weight: 700;
+  color: #00296B;
+}
+
+/* Right section: search, icons, pfp */
+.search {
+  display: flex;
+  align-items: center;
+  background: #EBEBEB;
+  border-radius: 12px;
+  padding: 10px 16px;
+  gap: 8px;
+  height: 31px;
+}
+
+.Search {
+  font-family: 'Segoe UI';
+  font-style: italic;
+  font-weight: 600;
+  font-size: 15px;
+  color: #1E1E1E;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.pfpAndNotifi {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.icon {
+  font-size: 24px;
+  color: #00296B;
+  cursor: pointer;
+}
+
+.searchIcon {
+  color: #6E6E6E;
+  font-size: 20px;
+}
+
+.pfp {
+  width: 52px;
+  height: 52px;
+  background-image: url('https://i.pravatar.cc/52'); /* Placeholder image */
+  background-size: cover;
+  border: 1px solid #021b43;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pfp:hover {
+  transform: scale(1.05);
+}
+
+.optionsPopup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 16px 8px;
+  gap: 8px;
+  position: absolute;
+  top: 36px;
+  right: 0;
+  width: 210px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  z-index: 1000;
+}
+
+.optionsItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 6px;
+  width: 194px;
+  min-height: 28px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.optionsItem:hover {
+  background: #f2f6fa;
+}

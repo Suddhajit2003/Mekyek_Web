@@ -1,0 +1,350 @@
+/* LoginSignupModal.module.css */
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+}
+
+.modalCard {
+  position: relative;
+  width: 95vw;
+  max-width: 420px;
+  background: #F4F4F4;
+  border-radius: 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px 64px;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.closeButton {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #BEDCFF;
+  border-radius: 16px;
+  z-index: 10;
+  border: none;
+  cursor: pointer;
+}
+
+.closeIcon {
+  width: 28px;
+  height: 28px;
+  background: #00296B;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  margin-top: 24px;
+  margin-bottom: 4px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #003F88;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.toggleRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.toggleContainer {
+  background: #BEDCFF;
+  border-radius: 32px;
+  width: 100%;
+  max-width: 320px;
+  height: 48px;
+  padding: 2px;
+  display: flex;
+}
+
+.toggleButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  height: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(0,41,107,0.56);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.toggleButtonActive {
+  background: #00296B;
+  color: #fff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  margin-top: 16px;
+}
+
+.inputGroup {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  color: #00296B;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  border: 2px solid #00296B;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-size: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background: transparent;
+  outline: none;
+}
+
+.rememberRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 12px;
+}
+
+.rememberCheckbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00296B;
+  border-radius: 6px;
+  margin-right: 8px;
+}
+
+.rememberLabel {
+  color: #003F88;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.forgotButton {
+  color: #003F88;
+  font-weight: 700;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.loginButton {
+  margin-top: 24px;
+  width: 180px;
+  height: 48px;
+  background: #003F88;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+}
+
+.loginButton:hover {
+  background: #00296B;
+}
+
+.orDivider {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 24px 0;
+  text-align: center;
+}
+
+.orDivider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #ccc;
+  z-index: 1;
+}
+
+.orText {
+  position: relative;
+  display: inline-block;
+  padding: 0 16px;
+  background: #F4F4F4;
+  color: #1E1E1E;
+  font-size: 1.2rem;
+  z-index: 2;
+}
+
+.googleButton {
+  width: 100%;
+  max-width: 400px;
+  height: 56px;
+  border: 2px solid #003F88;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.googleButton:hover {
+  background: #f0f8ff;
+}
+
+.googleIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.googleText {
+  color: #003F88;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.signupRow {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.signupText {
+  font-size: 1rem;
+  color: #1E1E1E;
+  font-family: 'Segoe UI', sans-serif;
+  font-style: italic;
+}
+
+.signupLink {
+  color: #003F88;
+  text-decoration: underline;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* Responsive styles */
+@media (min-width: 500px) {
+  .modalCard {
+    max-width: 450px;
+    padding: 32px 32px 64px;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+  }
+  
+  .toggleContainer {
+    height: 52px;
+    max-width: 360px;
+  }
+  
+  .toggleButton {
+    font-size: 1.1rem;
+  }
+  
+  .input {
+    height: 52px;
+    font-size: 1.1rem;
+  }
+  
+  .loginButton {
+    width: 200px;
+    height: 52px;
+    font-size: 1.4rem;
+  }
+  
+  .signupText {
+    font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .modalCard {
+    max-width: 500px;
+    padding: 40px 40px 72px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .toggleContainer {
+    height: 56px;
+    max-width: 400px;
+  }
+  
+  .toggleButton {
+    font-size: 1.2rem;
+  }
+  
+  .input {
+    height: 56px;
+    font-size: 1.2rem;
+  }
+  
+  .loginButton {
+    width: 220px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+  
+  .signupText {
+    font-size: 1.2rem;
+  }
+}

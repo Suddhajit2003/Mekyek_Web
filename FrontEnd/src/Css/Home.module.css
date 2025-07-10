@@ -1,0 +1,23 @@
+body {
+  background-color: #f0f2f5c7;
+}
+
+/* Home Container - Simple White Background */
+.homeContainer {
+  background-color: #ffffff;
+  min-height: 100vh;
+  padding-top: 70px;
+}
+
+/* Feed Container - Simple Layout */
+.feedContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .homeContainer {
+    padding-top: 60px;
+  }
+}

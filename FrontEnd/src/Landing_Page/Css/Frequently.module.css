@@ -1,0 +1,220 @@
+/* FAQ Section */
+.faqSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 64px;
+  gap: 27px;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 2804px;
+  background: none;
+  z-index: 2;
+}
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  width: 1312px;
+  height: 120px;
+}
+.heading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 64px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #00296B;
+  margin: 0;
+}
+.subheading {
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #003F88;
+  margin: 0;
+}
+.faqList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 24px;
+  width: 1312px;
+}
+.faqItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: #fff;
+  box-shadow: 5px 9px 11px rgba(0,0,0,0.05);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, background 0.2s;
+  overflow: hidden;
+  border: none;
+}
+.faqItem:hover {
+  box-shadow: 0 16px 32px rgba(0,0,0,0.10);
+  background: #f5f8ff;
+}
+.faqItem:focus {
+  outline: 2px solid #003F88;
+}
+.faqRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 12px;
+  gap: 141px;
+  width: 100%;
+}
+.faqQuestion {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 27px;
+  letter-spacing: 0.02em;
+  color: #00296B;
+  flex: 1;
+}
+.faqIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+}
+.faqAnswer {
+  width: 95%;
+  margin: 0 auto 18px auto;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #003F88;
+  line-height: 1.5;
+  background: #f7faff;
+  border-radius: 12px;
+  padding: 16px 24px 8px 24px;
+  box-sizing: border-box;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(.4,0,.2,1), opacity 0.3s;
+}
+.faqOpen .faqAnswer {
+  max-height: 200px;
+  opacity: 1;
+}
+.faqFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  width: 1312px;
+}
+.faqHelp {
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #003F88;
+  margin-bottom: 0;
+}
+.faqCtaBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 24px;
+  gap: 10px;
+  width: 206px;
+  height: 36px;
+  background: #003F88;
+  border-radius: 12px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0;
+}
+.faqCtaBtn:hover {
+  background: #00296B;
+}
+
+@media (max-width: 1400px) {
+  .headingGroup, .faqList, .faqFooter {
+    width: 100vw;
+    max-width: 98vw;
+  }
+}
+@media (max-width: 900px) {
+  .faqList {
+    gap: 16px;
+  }
+  .faqItem {
+    min-height: 70px;
+  }
+  .faqRow {
+    gap: 32px;
+    padding: 16px 8px;
+  }
+}
+@media (max-width: 700px) {
+  .faqSection {
+    padding: 12px 2vw;
+    height: auto;
+  }
+  .heading {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .subheading {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .faqList {
+    gap: 8px;
+  }
+  .faqItem {
+    min-height: 50px;
+  }
+  .faqRow {
+    gap: 12px;
+    padding: 10px 4px;
+  }
+  .faqFooter {
+    gap: 8px;
+  }
+  .faqCtaBtn {
+    font-size: 18px;
+    height: 48px;
+    width: 140px;
+    padding: 12px 8px;
+  }
+}

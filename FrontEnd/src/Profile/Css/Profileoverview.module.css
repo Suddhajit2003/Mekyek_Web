@@ -1,0 +1,701 @@
+/* Profile Container */
+.profile {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #F4F4F4;
+  padding-top: 70px; /* Space for fixed navbar */
+}
+
+/* Background Image Container */
+.bgImageContainer {
+  position: absolute;
+  height: 345px;
+  left: 64px;
+  right: 64px;
+  top: 90px;
+  background: #FFFFFF;
+}
+
+/* Background Image */
+.bgImage {
+  position: absolute;
+  height: 345px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  background: linear-gradient(94.09deg, rgba(0, 0, 0, 0.8352) 22.01%, rgba(0, 0, 0, 0.48) 49.75%, rgba(0, 0, 0, 0.8544) 99.51%), url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Profile Picture */
+.pfp {
+  position: absolute;
+  width: 222px;
+  height: 222px;
+  left: 89px;
+  top: 314px;
+  background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
+  background-size: cover;
+  background-position: center;
+  border: 9px solid #FFFFFF;
+  border-radius: 120px;
+}
+
+/* Name */
+.name {
+  position: absolute;
+  width: 297px;
+  height: 64px;
+  left: 89px;
+  top: 544px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 64px;
+  letter-spacing: 0.01em;
+  color: #1E1E1E;
+}
+
+/* Job Title */
+.jobTitle {
+  position: absolute;
+  width: 322px;
+  height: 24px;
+  left: 89px;
+  top: 614px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #777777;
+}
+
+/* Location Container */
+.locationContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 6px;
+  position: absolute;
+  width: 140px;
+  height: 20px;
+  left: 89px;
+  top: 644px;
+}
+
+.locationIcon {
+  width: 12px;
+  height: 17px;
+  background: #1E1E1E;
+}
+
+.locationText {
+  width: 122px;
+  height: 20px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  color: #1E1E1E;
+}
+
+/* Connections and Followers */
+.connectionsFollowers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 38px;
+  position: absolute;
+  width: 247px;
+  height: 20px;
+  left: 89px;
+  top: 680px;
+}
+
+.connections, .followers {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: #00296B;
+}
+
+.connections {
+  width: 111px;
+  height: 20px;
+}
+
+.followers {
+  width: 98px;
+  height: 20px;
+}
+
+/* Edit Profile Button */
+.editProfileBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 22px 16px;
+  position: absolute;
+  width: 205px;
+  height: 75.21px;
+  right: 64px;
+  top: 451px;
+  background: #00296B;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+}
+
+.editProfileIcon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  gap: 10px;
+  width: 31.29px;
+  height: 31.21px;
+}
+
+.editProfileText {
+  width: 141.71px;
+  height: 29px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 29px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* Profile Completion */
+.profileCompletion {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 5px;
+  position: absolute;
+  width: 199px;
+  height: 134px;
+  right: 64px;
+  top: 556px;
+}
+
+.progressBar {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.progressCircle {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 0px;
+  top: 0px;
+  background: #00A840;
+  border-radius: 50px;
+}
+
+.progressBg {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 0px;
+  top: 0px;
+  background: rgba(110, 110, 110, 0.19);
+  border-radius: 50px;
+}
+
+.progressText {
+  position: absolute;
+  width: 44px;
+  height: 29px;
+  right: 28px;
+  top: 35px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  color: #0DAC4A;
+}
+
+.completionText {
+  width: 199px;
+  height: 29px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  color: #159D49;
+}
+
+/* Section Styles */
+.section {
+  background: #FFFFFF;
+  box-shadow: 5px 9px 11px rgba(0, 0, 0, 0.05);
+  border-radius: 22px;
+}
+
+/* About Section */
+.aboutSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 8px;
+  gap: 12px;
+  position: absolute;
+  height: 209px;
+  left: 64px;
+  right: 728px;
+  top: 724px;
+}
+
+/* Languages Section */
+.languagesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 8px;
+  gap: 12px;
+  position: absolute;
+  height: 209px;
+  left: 728px;
+  right: 64px;
+  top: 724px;
+}
+
+/* Education Section */
+.educationSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 22px 16px;
+  gap: 16px;
+  position: absolute;
+  height: 514px;
+  left: 64px;
+  right: 728px;
+  top: 949px;
+}
+
+/* Experience Section */
+.experienceSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 22px 16px;
+  gap: 16px;
+  position: absolute;
+  height: 864px;
+  left: 64px;
+  right: 728px;
+  top: 1479px;
+}
+
+/* Contact Section */
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 8px;
+  gap: 12px;
+  position: absolute;
+  height: 209px;
+  left: 728px;
+  right: 64px;
+  top: 958px;
+}
+
+/* Skills Section */
+.skillsSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 8px;
+  gap: 12px;
+  position: absolute;
+  height: 209px;
+  left: 728px;
+  right: 64px;
+  top: 1183px;
+}
+
+/* People You May Know Section */
+.peopleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 0.4px;
+  position: absolute;
+  height: 282.4px;
+  left: 728px;
+  right: 64px;
+  top: 1408px;
+  background: #6E6E6E;
+  box-shadow: 5px 9px 11px rgba(0, 0, 0, 0.05);
+  border-radius: 22px;
+}
+
+/* Section Headers */
+.sectionHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 12px;
+  gap: 482px;
+  width: 632px;
+  height: 29px;
+}
+
+.sectionTitle {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 29px;
+  color: #00296B;
+}
+
+.sectionContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 632px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 26px;
+  letter-spacing: 0.01em;
+  color: #000000;
+}
+
+/* Add Button */
+.addBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 9px 0px;
+  gap: 5px;
+  width: 167px;
+  height: 39px;
+  background: #00296B;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* Education/Experience Items */
+.educationItem, .experienceItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 8px;
+  width: 616px;
+}
+
+.itemHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 8px;
+  gap: 264px;
+  width: 616px;
+  height: 89px;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 11px;
+  width: 595px;
+  height: 89px;
+}
+
+.itemLogo {
+  width: 89px;
+  height: 89px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 44.5px;
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 6px;
+  width: 221px;
+  height: 85px;
+}
+
+.itemTitle {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 29px;
+  color: #003F88;
+}
+
+.itemSubtitle {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #6E6E6E;
+}
+
+.itemDate {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #6E6E6E;
+}
+
+.itemDescription {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0px 10px 109px;
+  gap: 10px;
+  width: 616px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 32px;
+  color: #000000;
+}
+
+/* Skills */
+.skillsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  padding: 0px;
+  gap: 22px 20px;
+  width: 632px;
+  height: 102px;
+}
+
+.skillTag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  height: 40px;
+  background: #00296B;
+  border-radius: 32px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+
+.addSkillTag {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 91px;
+  height: 40px;
+  background: rgba(207, 207, 207, 0.31);
+  border-radius: 32px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  color: #1E1E1E;
+  cursor: pointer;
+}
+
+/* People You May Know */
+.peopleContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 16px;
+  gap: 16px;
+  width: 648px;
+  height: 246px;
+  background: #FFFFFF;
+}
+
+.peopleList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  width: 616px;
+  height: 182px;
+}
+
+.personItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 58px;
+  width: 616px;
+  height: 50px;
+}
+
+.personInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 9px;
+  width: 530px;
+  height: 50px;
+}
+
+.personPfp {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 32px;
+}
+
+.personDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 6px;
+  width: 208px;
+  height: 50px;
+}
+
+.personName {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #00296B;
+}
+
+.personTitle {
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  color: #6E6E6E;
+}
+
+.followBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 16px;
+  gap: 10px;
+  width: 86px;
+  height: 36px;
+  border: 1px solid #00296B;
+  border-radius: 9px;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #00296B;
+}
+
+.viewMore {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0px;
+  gap: 10px;
+  width: 648px;
+  height: 36px;
+  background: #FFFFFF;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  color: #003F88;
+  cursor: pointer;
+}
+
+/* Edit Icon */
+.editIcon {
+  width: 18px;
+  height: 18px;
+  background: #003F88;
+  cursor: pointer;
+}
+
+/* Three Dots Menu */
+.menuIcon {
+  width: 21px;
+  height: 5px;
+  background: #6E6E6E;
+  transform: rotate(-90deg);
+  cursor: pointer;
+}

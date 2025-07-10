@@ -1,0 +1,642 @@
+/* Main Container */
+.learnContainer {
+  position: relative;
+  min-height: 1310px;
+  width: 100%;
+  top: -100px;
+  background: linear-gradient(135deg, #ffffff 0%, #e7e6e6 100%);
+  background-attachment: fixed;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+  z-index: 1;
+}
+
+/* Toast Messages */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e2e2 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 1000;
+  animation: slideIn 0.5s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 350px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Search Content */
+.searchContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 16px;
+  position: absolute;
+  width: 1100px;
+  height: 60px;
+  left: 64px;
+  top: 125px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.searchContent:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Search Icon */
+.searchIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px;
+  gap: 10px;
+  width: 25px;
+  height: 25px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.searchIconVector {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #1932a2;
+  border-radius: 50%;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  position: relative;
+}
+
+.searchIconVector::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background: #0b1c69;
+  right: -6px;
+  bottom: -6px;
+  transform: rotate(45deg);
+}
+
+/* Place Text */
+.placeText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  flex: 1;
+  height: 40px;
+}
+
+.searchInput {
+  width: 100%;
+  height: 24px;
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #263a5d;
+  border: none;
+  outline: none;
+  background: transparent;
+  flex: 1;
+}
+
+.searchInput::placeholder {
+  color: #09218b;
+  opacity: 0.7;
+}
+
+/* Search Button */
+.searchButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 10px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #0b0987 100%);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.searchButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Filter Button */
+.filterButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  position: absolute;
+  height: 40px;
+  right: 137px;
+  top: 168px;
+  border: 2px solid rgba(0, 0, 0, 0.406);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.filterButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Sort Button */
+.sortButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  gap: 10px;
+  position: absolute;
+  height: 40px;
+  right: 33px;
+  top: 168px;
+  border: 2px solid rgba(0, 0, 0, 0.343);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-family: 'Segoe UI', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.sortButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Explore Courses Section */
+.exploreCourses {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 48px;
+  gap: 32px;
+  position: absolute;
+  width: 1217px;
+  height: 450px;
+  left: 64px;
+  top: 252px;
+  background: rgba(3, 7, 90, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 20px 60px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.exploreCourses:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 24px 70px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Content */
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 32px;
+  width: 1280px;
+  height: 160px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.heroTitle {
+  width: 1280px;
+  height: 64px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 64px;
+  color: #ffffff;
+  margin: 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  background: linear-gradient(135deg, #ffffff 0%, #000000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroDescription {
+  width: 1135px;
+  height: 80px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  color: #d7dbe1;
+  margin: 0;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Hero Buttons */
+.heroButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 17px;
+  width: 675px;
+  height: 64px;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.exploreCoursesBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 32px;
+  gap: 10px;
+  width: 329px;
+  height: 64px;
+  background: linear-gradient(135deg, #151928 0%, #0a0384 100%);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.exploreCoursesBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.viewLearningPathsBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 32px;
+  gap: 10px;
+  width: 329px;
+  height: 64px;
+  border: 2px solid #ffffff;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #dbdbdc;
+  transition: all 0.3s ease;
+}
+
+.viewLearningPathsBtn:hover {
+  background: #e6e6e7;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+}
+
+/* Learning Paths Title */
+.learningPathsTitle {
+  position: absolute;
+  width: 400px;
+  height: 40px;
+  left: 64px;
+  top: 886px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  color: #000000;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(232, 231, 231, 0.3);
+}
+
+/* View All Button */
+.viewAllButton {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  right: 64px;
+  top: 886px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.469);
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.viewAllButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Path Cards */
+.pathCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 0px;
+  position: absolute;
+  height: 420px;
+  width: 400px;
+  top: 950px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pathCard:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+}
+
+.path1 {
+  left: 64px;
+}
+
+.path2 {
+  left: 530px;
+}
+
+.path3 {
+  left: 996px;
+}
+
+/* Add spacing after path cards */
+.learnContainer::after {
+  content: "";
+  display: block;
+  height: 100px;
+  width: 100%;
+}
+
+/* Path Content */
+.pathContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 32px 24px;
+  gap: 24px;
+  width: 400px;
+  height: 270px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  transition: all 0.3s ease;
+}
+
+.pathIcon {
+  width: 80px;
+  height: 80px;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffffff 0%, #5e5c5f 100%);
+  border-radius: 20px;
+  color: #FFFFFF;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.pathCard:hover .pathIcon {
+  transform: scale(1.1);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+}
+
+.pathInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  width: 360px;
+  height: auto;
+  flex: 1;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.pathTitle {
+  width: 360px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0.02em;
+  color: #1E1E1E;
+  margin: 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  transition: color 0.3s ease;
+}
+
+.pathCard:hover .pathTitle {
+  color: #aaacb6;
+}
+
+.pathDescription {
+  width: 360px;
+  height: auto;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #6E6E6E;
+  margin: 0;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+/* Path Footer */
+.pathFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* padding: 24px; */
+  gap: 129px;
+  width: 388px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  border-radius: 0 0 24px 24px;
+}
+
+.pathCourses {
+  width: auto;
+  height: 32px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.02em;
+  color: #1E1E1E;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.pathExploreBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 8px;
+  width: auto;
+  min-width: 120px;
+  height: 44px;
+  background: linear-gradient(135deg, #484747 0%, #051a92 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.pathExploreBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}

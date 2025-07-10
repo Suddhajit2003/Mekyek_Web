@@ -1,0 +1,747 @@
+/* Main News Card Container */
+.newsCard {
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 10px;
+  gap: 27px;
+
+  position: relative;
+  height: 281px;
+  left: 396px;
+  right: 396px;
+  margin-bottom: 20px;
+
+  background: #FFFFFF;
+  /* box shadow */
+  box-shadow: 5px 9px 11px rgba(0, 0, 0, 0.05);
+  border-radius: 22px;
+  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Toast Message */
+.toast {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Card Positioning */
+.card1 {
+  position: absolute;
+  top: 1029px;
+}
+
+.card2 {
+  position: absolute;
+  top: 1353px;
+}
+
+.card3 {
+  position: absolute;
+  top: 1670px;
+}
+
+/* Header Section - Frame 52 */
+.header {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 166px;
+
+  width: 628px;
+  height: 32px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Category Tags - hashtag */
+.categoryTag {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  gap: 10px;
+
+  height: 32px;
+  border-radius: 22px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.categoryTag span {
+  height: 20px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.01em;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Business Category */
+.business {
+  width: 70px;
+  background: rgba(21, 157, 73, 0.22);
+}
+
+.business span {
+  width: 58px;
+  color: #0DAC4A;
+}
+
+/* Technology Category */
+.technology {
+  width: 89px;
+  background: #8DC2FF;
+}
+
+.technology span {
+  width: 77px;
+  color: #003F88;
+}
+
+/* Career Category */
+.career {
+  width: 56px;
+  background: #E88DFF;
+}
+
+.career span {
+  width: 44px;
+  color: #6D0887;
+}
+
+/* Publication Info */
+.publicationInfo {
+  height: 20px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.01em;
+  color: #6E6E6E;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Content Section - Frame 53 */
+.content {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 12px;
+
+  width: 628px;
+  height: 104px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* News Image */
+.newsImage {
+  width: 92px;
+  height: 104px;
+  overflow: hidden;
+  background: #f0f0f0;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.newsImage img {
+  width: 92px;
+  height: 104px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text Content - Frame 51 */
+.textContent {
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+
+  width: 524px;
+  height: 104px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
+/* Title */
+.title {
+  width: 524px;
+  height: 48px;
+
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  color: #000000;
+  margin: 0;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Description */
+.description {
+  width: 524px;
+  height: 40px;
+
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  color: #6E6E6E;
+  margin: 0;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Interaction Section - Interaction & save */
+.interactionSection {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 24px;
+
+  width: 628px;
+  height: 67px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+/* Interactions Container */
+.interactions {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px 16px;
+  gap: 24px;
+
+  width: 461px;
+  height: 23px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Individual Interaction Items */
+.interactionItem {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 6px;
+
+  height: 20px;
+  cursor: pointer;
+
+  /* Inside auto layout */
+  flex: none;
+  flex-grow: 0;
+}
+
+.interactionItem span {
+  height: 20px;
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  /* identical to box height */
+  color: #003F88;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Like */
+.interactionItem:nth-child(1) {
+  width: 51px;
+  order: 0;
+}
+
+.interactionItem:nth-child(1) span {
+  width: 27px;
+}
+
+/* Comment */
+.interactionItem:nth-child(2) {
+  width: 92px;
+  order: 1;
+}
+
+.interactionItem:nth-child(2) span {
+  width: 68px;
+}
+
+/* Share */
+.interactionItem:nth-child(3) {
+  width: 63px;
+  order: 2;
+}
+
+.interactionItem:nth-child(3) span {
+  width: 39px;
+}
+
+/* Repost */
+.interactionItem:nth-child(4) {
+  width: 71px;
+  order: 3;
+}
+
+.interactionItem:nth-child(4) span {
+  width: 47px;
+}
+
+/* Save */
+.interactionItem:nth-child(5) {
+  width: 56px;
+  height: 23px;
+  order: 4;
+}
+
+.interactionItem:nth-child(5) span {
+  width: 32px;
+}
+
+/* Icons with exact specifications */
+.likeIcon,
+.commentIcon,
+.shareIcon,
+.reportIcon,
+.saveIcon {
+  /* Vector */
+  width: 18px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  display: block;
+}
+
+.likeIcon,
+.commentIcon {
+  height: 18px;
+}
+
+.shareIcon {
+  height: 18px;
+}
+
+.reportIcon {
+  height: 11px;
+}
+
+.saveIcon {
+  height: 23px;
+}
+
+/* View Source */
+.viewSource {
+  width: 84px;
+  height: 20px;
+
+  font-family: 'Segoe UI';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  /* identical to box height */
+  color: #003F88;
+  cursor: pointer;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Hover Effects */
+.newsCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 5px 12px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.interactionItem:hover {
+  opacity: 0.8;
+  background: rgba(0, 63, 136, 0.05);
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.viewSource:hover {
+  opacity: 0.8;
+  background: rgba(0, 63, 136, 0.05);
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+/* Interactive States */
+.liked {
+  color: #E91E63 !important;
+}
+
+.liked span {
+  color: #E91E63 !important;
+  font-weight: 600;
+}
+
+.saved {
+  color: #4CAF50 !important;
+}
+
+.saved span {
+  color: #4CAF50 !important;
+  font-weight: 600;
+}
+
+/* Enhanced Interaction Item */
+.interactionItem {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.interactionItem:active {
+  transform: scale(0.95);
+}
+
+.viewSource {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.viewSource:active {
+  transform: scale(0.95);
+}
+
+/* More Options Button */
+.moreOptions {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+  margin-left: 8px;
+}
+
+.moreOptions:hover {
+  background: rgba(0, 63, 136, 0.1);
+}
+
+
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.modalHeader h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #003F88;
+  margin: 0;
+}
+
+.modalHeader button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6E6E6E;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.modalHeader button:hover {
+  background: rgba(0, 63, 136, 0.1);
+}
+
+.modalContent {
+  padding: 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Repost Modal */
+.repostPreview {
+  margin-bottom: 16px;
+}
+
+.previewCard {
+  padding: 16px;
+  background: #F8F9FA;
+  border-radius: 12px;
+  border-left: 4px solid #003F88;
+}
+
+.previewCard h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #003F88;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.previewCard p {
+  font-size: 14px;
+  color: #6E6E6E;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.previewCard span {
+  font-size: 12px;
+  color: #6E6E6E;
+  font-weight: 500;
+}
+
+.repostComment {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px 16px;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.repostComment:focus {
+  border-color: #003F88;
+  box-shadow: 0 0 0 3px rgba(0, 63, 136, 0.1);
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 20px 24px;
+  border-top: 1px solid #E5E5E5;
+  background: #F8F9FA;
+}
+
+.repostBtn,
+.repostWithCommentBtn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: none;
+}
+
+.repostBtn {
+  background: transparent;
+  color: #003F88;
+  border: 2px solid #003F88;
+}
+
+.repostBtn:hover {
+  background: rgba(0, 63, 136, 0.05);
+}
+
+.repostWithCommentBtn {
+  background: #003F88;
+  color: white;
+}
+
+.repostWithCommentBtn:hover {
+  background: #002F66;
+}
+
+/* Report Modal */
+.reportReasons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.reportReason {
+  padding: 12px 16px;
+  background: #F8F9FA;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.reportReason:hover {
+  background: #003F88;
+  color: white;
+  border-color: #003F88;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .newsCard {
+    position: relative;
+    left: auto;
+    right: auto;
+    width: 100%;
+    max-width: 628px;
+    margin: 20px auto;
+  }
+  
+  .card1,
+  .card2,
+  .card3 {
+    top: auto;
+  }
+  
+  .header,
+  .content,
+  .interactionSection {
+    width: 100%;
+  }
+  
+  .textContent,
+  .title,
+  .description {
+    width: 100%;
+  }
+} 
